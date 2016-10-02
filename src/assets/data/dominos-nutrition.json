@@ -1,0 +1,483 @@
+{
+	"pizza": {
+
+		"sizes": {
+			"large": "10",
+			"medium": "8",
+			"small": "6"
+		},
+
+		"specialityPizzas": {
+			"mightyMeaty": {
+				"crust": "deepPan",
+				"sauce": "tomato",
+				"cheese": "mozzerella",
+				"toppings": [
+					"mushrooms",
+					"ham",
+					"cumberlandSausage",
+					"redOnion"
+				]
+			},
+			"pepperoniPassion": {
+				"crust": "classic",
+				"sauce": "tomato",
+				"cheese": "mozzerella",
+				"toppings": [
+					"pepperoni",
+					"redOnion"
+				]
+			},
+			"texasBbq": {
+				"crust": "cheesyCrust",
+				"sauce": "bbq",
+				"cheese": "mozzerella",
+				"toppings": [
+					"pepperoni",
+					"redOnion"
+				]
+			},
+			"vegiSupreme": {
+				"crust": "edge",
+				"sauce": "tomato",
+				"cheese": "mozzerella",
+				"toppings": [
+					"pineapple",
+					"blackOlives"
+				]
+			},
+			"americanHot": {
+				"crust": "classic",
+				"sauce": "tomato",
+				"cheese": "mozzerella",
+				"toppings": [
+					"pepperoni",
+					"jalapenoPeppers"
+				]
+			}
+		},
+
+		"ingredients": {
+			"crust": {
+				"deepPan": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"classic": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"glutenFree": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"edge": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"cheesyCrust": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"thinNcrispy": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				}
+			},
+
+			"sauce": {
+				"tomato": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"bbq": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				}
+			},
+
+			"cheese": {
+				"mozzerella": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"reducedFat": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				}
+			},
+
+			"toppings": {
+				"chickenBreastStrips": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"greenAndRedPeppers": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"groundBeef": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"ham": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"cumberlandSausage": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"jalapenoPeppers": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"mushrooms": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"pepperoni": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"pineapple": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"porkMeatballs": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"redOnion": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"tomatoes": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"smokedBaconRashers": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"sirachaSauce": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"sweetcorn": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"anchovies": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"tandooriChicken": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"babySpinach": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"blackOlives": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"chorizoSausage": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"dominosHerbs": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"sunblushTomatoes": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				},
+				"tuna": {
+					"kj": "100",
+					"kcal": "20",
+					"fat": "0g",
+					"satFat": "0g",
+					"sugars": "1g",
+					"salt": "1g"
+				}
+			}
+		}
+	},
+
+	"sides": {
+		"garlicBread": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"cheesyGarlicBread": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"chickenKickers": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"cayenneRoastWings": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"chipotleChicken": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"chunkyChips": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"potatoWedges": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		}
+	},
+
+	"dips": {
+		"sourCream": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"sweetChilli": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"bbq": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"ranch": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		}
+	},
+
+	"drinks": {
+		"cokeCan": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"fantaCan": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"sevenUpCan": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"cokeBottle1litre": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"fantaBottle1litre": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		},
+		"sevenBottle1litre": {
+			"kj": "100",
+			"kcal": "20",
+			"fat": "0g",
+			"satFat": "0g",
+			"sugars": "1g",
+			"salt": "1g"
+		}
+	}
+}

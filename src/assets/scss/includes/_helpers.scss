@@ -1,0 +1,36 @@
+// =============================================================================
+//	HELPERS
+// =============================================================================
+
+//	BG Images
+%bg-cover {
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+//	Visibility
+.hide {
+	display: none !important;
+}
+
+%hide-text {
+	overflow: hidden;
+	text-indent: -9999rem;
+}
+
+.tel-link {
+
+	&:hover {
+		opacity: 1;
+		cursor: default;
+	}
+}
+
+.full-img {
+	width: 100%;
+}
+
+%margin-center {
+	@include margin(0 auto);
+}

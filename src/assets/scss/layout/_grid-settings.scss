@@ -1,0 +1,26 @@
+// =============================================================================
+//	GRID SETTINGS
+// =============================================================================
+
+@import 'neat-helpers';
+
+$padding-lr: 0em;
+
+$gutter: $padding-lr;
+$max-width: 95rem;
+
+$small-screen: 40em;
+$medium-screen: 50em;
+$large-screen: 64em;
+
+$xsmall-only: new-breakpoint(max-width 39.99em);
+
+$small-only: new-breakpoint(min-width $small-screen max-width 49.99em);
+$small: new-breakpoint(min-width $small-screen);
+$small-down: new-breakpoint(max-width 49.99em);
+
+$medium: new-breakpoint(min-width $medium-screen);
+$medium-only: new-breakpoint(min-width $medium-screen max-width 63.99em);
+$medium-down: new-breakpoint(max-width 63.99em);
+
+$large: new-breakpoint(min-width $large-screen);

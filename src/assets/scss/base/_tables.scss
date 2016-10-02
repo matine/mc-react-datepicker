@@ -1,0 +1,41 @@
+// =============================================================================
+//  TABLES
+// =============================================================================
+
+table,
+.table {
+  table-layout: fixed;
+  width: 100%;
+  @include margin($small-spacing 0);
+  @include font-feature-settings('kern', 'liga', 'tnum');
+  border-collapse: collapse;
+}
+
+th,
+.th {
+  @include padding($small-spacing 0);
+  font-weight: 600;
+  text-align: left;
+}
+
+td,
+.td {
+  @include padding($small-spacing 0);
+}
+.td {
+  display: inline-block;
+}
+
+tr,
+td,
+th,
+.tr,
+.td,
+.th {
+  vertical-align: middle;
+}
+
+tr,
+.tr {
+    border-bottom: $base-border;
+}

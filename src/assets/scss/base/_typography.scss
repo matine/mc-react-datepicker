@@ -1,0 +1,75 @@
+// =============================================================================
+//  TYPOGRAPHY
+// =============================================================================
+
+html {
+	font-size: 75%;
+}
+
+body {
+	@include font-feature-settings('kern', 'liga', 'pnum');
+	-webkit-font-smoothing: antialiased;
+	color: $base-font-color;
+	font-family: $base-font-family;
+	font-size: $base-font-size;
+	font-size: 12px;
+	line-height: $base-line-height;
+
+	-webkit-text-size-adjust:100%;
+	-ms-text-size-adjust:100%;
+	-webkit-text-shadow:rgba(255,255,255,0.01) 0 0 1px;
+	text-shadow:rgba(255,255,255,0.01) 0 0 1px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@include margin(0 0 $small-spacing);
+	font-family: $heading-font-family;
+	font-size: $base-font-size;
+	font-weight: initial;
+	line-height: $heading-line-height;
+	letter-spacing: 0.1rem;
+
+	a {
+		color: inherit;
+	}
+}
+
+p {
+	@include margin(0 0 $small-spacing);
+}
+
+a {
+	color: $action-color;
+	text-decoration: none;
+	@include transition(all 0.2s linear);
+
+	&:active,
+	&:focus,
+	&:hover {
+		opacity: 0.7;
+	}
+
+	&:active,
+	&:focus {
+		outline: none;
+	}
+}
+
+hr {
+	margin: $base-spacing 0;
+	border-bottom: $base-border;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+}
+
+img,
+picture {
+	max-width: 100%;
+	@extend %m-none;
+}

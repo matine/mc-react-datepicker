@@ -12,7 +12,6 @@ var App = React.createClass({
 	render : function() {
 		return (
 			<div>
-				<h1>Datepicker Component</h1>
 				<DatePicker></DatePicker>
 			</div>
 		)

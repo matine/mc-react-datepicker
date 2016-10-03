@@ -19,8 +19,8 @@ var DatePicker = React.createClass({
 		return {
 			view1: view1,
 			view2: view2,
-			selected1: DateUtilities.clone(view1),
-			selected2: DateUtilities.clone(view2),
+			selected1: "Check In",
+			selected2: "Check Out",
 			minDate: null,
 			maxDate: null,
 			visible: false
@@ -51,6 +51,13 @@ var DatePicker = React.createClass({
 		this.setState({ selected2: day });
 	},
 
+	setSelect1ToDefault: function() {
+		this.setState({ selected1: "Check In" });
+	},
+	setSelect2ToDefault: function() {
+		this.setState({ selected2: "Check Out" });
+	},
+
 	show: function() {
 		this.setState({ visible: true });
 	},
@@ -73,11 +80,16 @@ var DatePicker = React.createClass({
 			selectedOther: this.state.selected1
 		}
 
+		var selected1String = calendarObjStart.selected;
+		var selected2String = calendarObjEnd.selected;
+		if (typeof calendarObjStart.selected !== "string") { selected1String = DateUtilities.toString(this.state.selected1) }
+		if (typeof calendarObjEnd.selected !== "string") { selected2String = DateUtilities.toString(this.state.selected2) }
+
 		return (
 			<div className="ardp-date-picker">
 				<div className="datepicker-inputs">
-					<input type="text" className="date-picker-trigger" readOnly="true" value={DateUtilities.toString(this.state.selected1)} onClick={this.show} />
-					<input type="text" className="date-picker-trigger" readOnly="true" value={DateUtilities.toString(this.state.selected2)} onClick={this.show} />
+					<input type="text" className="date-picker-trigger" readOnly="true" value={selected1String} onClick={this.show} />
+					<input type="text" className="date-picker-trigger" readOnly="true" value={selected2String} onClick={this.show} />
 				</div>
 				<div className={this.state.visible ? "calendars visible" : "calendars"}>
 					<Calendar calendarObj={calendarObjStart} onSelect={this.onSelect1} minDate={this.state.minDate} maxDate={this.state.maxDate}></Calendar>

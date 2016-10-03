@@ -4,28 +4,5 @@
 
 body {
 	background-color: $light-gray;
-}
-
-.site-wrapper {
-	padding-bottom: rem(110);
-}
-
-.container {
-	@include clearfix;
-	width: 100%;
-	max-width: rem(1015);
-	@include margin(0 auto);
-	@include padding(null rem(35));
-}
-
-.main-col {
-	width: 100%;
-	float: left;
-	max-width: rem(590);
-}
-.side-col {
-	width: 100%;
-	float: left;
-	max-width: rem(345);
-	margin-left: rem(10);
+	padding: 20px;
 }

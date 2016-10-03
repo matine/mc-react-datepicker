@@ -26,28 +26,26 @@ var Week = React.createClass({
 	},
 
 	getDayClassName: function(day) {
-
-
 		var className = "day";
 		if (DateUtilities.isSameDay(day, new Date()))
 			className += " today";
 		if (this.props.month !== day.getMonth())
 			className += " other-month";
-		if (this.props.calendarObj.selected && DateUtilities.isSameDay(day, this.props.calendarObj.selected))
+		if (typeof this.props.calendarObj.selected !== "string" && DateUtilities.isSameDay(day, this.props.calendarObj.selected))
 			className += " selected";
 		if (this.isDisabled(day))
 			className += " disabled";
-		if ( this.props.calendarObj.calendar === "start" && (day > this.props.calendarObj.selected && day < this.props.calendarObj.selectedOther)) {
+		if (this.props.calendarObj.calendar === "start" && (day > this.props.calendarObj.selected && day <= this.props.calendarObj.selectedOther)) {
 			className += " inbetween";
 		}
-		if ( this.props.calendarObj.calendar === "end" && (day < this.props.calendarObj.selected && day > this.props.calendarObj.selectedOther)) {
+		if (this.props.calendarObj.calendar === "end" && (day < this.props.calendarObj.selected && day >= this.props.calendarObj.selectedOther)) {
 			className += " inbetween";
 		}
 		return className;
 	},
 
 	onSelect: function(day) {
-		if (!this.isDisabled(day))
+		if (!this.isDisabled(day) && !this.isWithinDateRange(day) && this.props.month === day.getMonth())
 			this.props.onSelect(day);
 	},
 
@@ -56,6 +54,15 @@ var Week = React.createClass({
 		var maxDate = this.props.maxDate;
 
 		return (minDate && DateUtilities.isBefore(day, minDate)) || (maxDate && DateUtilities.isAfter(day, maxDate));
+	},
+
+	isWithinDateRange: function(day) {
+		if (this.props.calendarObj.calendar === "end" && this.props.calendarObj.selectedOther !== "string") {
+			return this.props.calendarObj.selectedOther > day
+		}
+		if (this.props.calendarObj.calendar === "start" && this.props.calendarObj.selectedOther !== "string") {
+			return this.props.calendarObj.selectedOther < day
+		}
 	},
 
 	render: function() {

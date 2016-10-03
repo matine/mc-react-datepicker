@@ -86,7 +86,7 @@ var DatePicker = React.createClass({
 		if (typeof calendarObjEnd.selected !== "string") { selected2String = DateUtilities.toString(this.state.selected2) }
 
 		return (
-			<div className="ardp-date-picker">
+			<div className="mc-date-picker">
 				<div className="datepicker-inputs">
 					<input type="text" className="date-picker-trigger" readOnly="true" value={selected1String} onClick={this.show} />
 					<input type="text" className="date-picker-trigger" readOnly="true" value={selected2String} onClick={this.show} />

@@ -26,15 +26,23 @@ var Week = React.createClass({
 	},
 
 	getDayClassName: function(day) {
+
+
 		var className = "day";
 		if (DateUtilities.isSameDay(day, new Date()))
 			className += " today";
 		if (this.props.month !== day.getMonth())
 			className += " other-month";
-		if (this.props.selected && DateUtilities.isSameDay(day, this.props.selected))
+		if (this.props.calendarObj.selected && DateUtilities.isSameDay(day, this.props.calendarObj.selected))
 			className += " selected";
 		if (this.isDisabled(day))
 			className += " disabled";
+		if ( this.props.calendarObj.calendar === "start" && (day > this.props.calendarObj.selected && day < this.props.calendarObj.selectedOther)) {
+			className += " inbetween";
+		}
+		if ( this.props.calendarObj.calendar === "end" && (day < this.props.calendarObj.selected && day > this.props.calendarObj.selectedOther)) {
+			className += " inbetween";
+		}
 		return className;
 	},
 
@@ -64,7 +72,7 @@ var Week = React.createClass({
 	},
 
 	propTypes : {
-		selected : React.PropTypes.object.isRequired,
+		calendarObj : React.PropTypes.object.isRequired,
 		onSelect : React.PropTypes.func.isRequired,
 		minDate : React.PropTypes.object,
 		maxDate : React.PropTypes.object

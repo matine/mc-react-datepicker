@@ -33,7 +33,6 @@ var MonthHeader = React.createClass({
 		// if (!this.state.enabled)
 		// 	return;
 
-		console.log(view);
 		this.setState({
 			view: view,
 			enabled: false

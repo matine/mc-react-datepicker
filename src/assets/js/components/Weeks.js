@@ -14,8 +14,8 @@ var Weeks = React.createClass({
 
 	getInitialState: function() {
 		return {
-			view: DateUtilities.clone(this.props.view),
-			other: DateUtilities.clone(this.props.view),
+			view: DateUtilities.clone(this.props.calendarObj.view),
+			other: DateUtilities.clone(this.props.calendarObj.view),
 			sliding: null
 		};
 	},
@@ -25,7 +25,6 @@ var Weeks = React.createClass({
 	},
 
 	onTransitionEnd: function() {
-		console.log('Weeks: onTransitionEnd');
 		this.setState({
 			sliding: null,
 			view: DateUtilities.clone(this.state.other)
@@ -84,14 +83,13 @@ var Weeks = React.createClass({
 
 		return starts.map(function(s, i) {
 			return (
-				<Week key={i} start={s} month={month} selected={self.props.selected} onSelect={self.props.onSelect} minDate={self.props.minDate} maxDate={self.props.maxDate}></Week>
+				<Week key={i} start={s} month={month} calendarObj={this.props.calendarObj} onSelect={self.props.onSelect} minDate={self.props.minDate} maxDate={self.props.maxDate}></Week>
 			)
 		}.bind(self));
 	},
 
 	propTypes : {
-		view : React.PropTypes.object.isRequired,
-		selected : React.PropTypes.object.isRequired,
+		calendarObj : React.PropTypes.object.isRequired,
 		onTransitionEnd : React.PropTypes.func.isRequired,
 		onSelect : React.PropTypes.func.isRequired,
 		minDate : React.PropTypes.object,

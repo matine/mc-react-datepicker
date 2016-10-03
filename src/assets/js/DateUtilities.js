@@ -25,6 +25,38 @@ let DateUtilities =  {
 		return months[date.getMonth()] + " " + date.getFullYear();
 	},
 
+	getNextMonth: function(date) {
+		var currentMonth = date.getMonth();
+		var currentYear = date.getFullYear();
+		var nextMonth;
+		if (currentMonth < 11) {
+			nextMonth = currentMonth + 1;
+		} else {
+			nextMonth = 0;
+			currentYear++;
+		}
+		var d = new Date();
+		d.setMonth(nextMonth);
+		d.setFullYear(currentYear);
+		return d;
+	},
+
+	getPrevMonth: function(date) {
+		var currentMonth = date.getMonth();
+		var currentYear = date.getFullYear();
+		var prevMonth;
+		if (currentMonth > 0) {
+			prevMonth = currentMonth - 1;
+		} else {
+			prevMonth = 12;
+			currentYear--;
+		}
+		var d = new Date();
+		d.setMonth(prevMonth);
+		d.setFullYear(currentYear);
+		return d;
+	},
+
 	moveToDayOfWeek: function(date, dayOfWeek) {
 		while (date.getDay() !== dayOfWeek)
 			date.setDate(date.getDate()-1);

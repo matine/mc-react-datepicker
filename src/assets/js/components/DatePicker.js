@@ -21,8 +21,6 @@ var DatePicker = React.createClass({
 			selectedEnd: "Check Out",
 			startDateInputActive: false,
 			endDateInputActive: false,
-			minDate: null,
-			maxDate: null,
 			visible: false
 		};
 	},
@@ -32,14 +30,6 @@ var DatePicker = React.createClass({
 			if (this.state.visible && e.target.className !== "date-picker-trigger" && !Helpers.parentsHaveClassName(e.target, "mc-date-picker"))
 				this.hide();
 		}.bind(this));
-	},
-
-	setMinDate: function(date) {
-		this.setState({ minDate: date });
-	},
-
-	setMaxDate: function(date) {
-		this.setState({ maxDate: date });
 	},
 
 	onSelect: function(day) {
@@ -125,7 +115,7 @@ var DatePicker = React.createClass({
 					<input ref="endInput" type="text" className={this.state.endDateInputActive ? "date-picker-trigger active" : "date-picker-trigger"} readOnly="true" value={selectedEndString} onClick={this.show.bind(null, 'end')} />
 				</div>
 				<div className={this.state.visible ? "calendars visible" : "calendars"}>
-					<Calendar calendarObj={calendarObj} onSelect={this.onSelect} minDate={this.state.minDate} maxDate={this.state.maxDate}></Calendar>
+					<Calendar calendarObj={calendarObj} onSelect={this.onSelect}></Calendar>
 				</div>
 			</div>
 		)

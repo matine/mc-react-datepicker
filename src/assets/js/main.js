@@ -1,18 +1,19 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { Router, Route } from 'react-router';
-import { createHistory } from 'history';
+import { useRouterHistory } from 'react-router'
+import createHashHistory from 'history/lib/createHashHistory'
+const history = useRouterHistory(createHashHistory)({ queryKey: false })
 
 import NotFound from './components/NotFound';
 import App from './components/App';
-
 
 /*
 	Routes
 */
 
 var routes = (
-	<Router history={createHistory()}>
+	<Router history={history}>
 		<Route path="/" component={App}/>
 		<Route path="*" component={NotFound}/>
 	</Router>

@@ -27,16 +27,14 @@ var Calendar = React.createClass({
 			<div className="calendar">
 				<MonthHeader ref="monthHeader" view={this.props.calendarObj.view} onMove={this.onMove}></MonthHeader>
 				<WeekHeader ref="weekHeader"></WeekHeader><WeekHeader ref="weekHeader"></WeekHeader>
-				<Weeks ref="weeks" calendarObj={this.props.calendarObj} onTransitionEnd={this.onTransitionEnd} onSelect={this.props.onSelect} minDate={this.props.minDate} maxDate={this.props.maxDate}></Weeks>
+				<Weeks ref="weeks" calendarObj={this.props.calendarObj} onTransitionEnd={this.onTransitionEnd} onSelect={this.props.onSelect}></Weeks>
 			</div>
 		)
 	},
 
 	propTypes : {
 		calendarObj : React.PropTypes.object.isRequired,
-		onSelect : React.PropTypes.func.isRequired,
-		minDate : React.PropTypes.object,
-		maxDate : React.PropTypes.object
+		onSelect : React.PropTypes.func.isRequired
 	}
 });
 

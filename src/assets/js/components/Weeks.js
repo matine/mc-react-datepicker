@@ -65,28 +65,27 @@ var Weeks = React.createClass({
 	},
 
 	render: function() {
-		var currentSlidingClass, prevSlidingClass, nextSlidingClass;
+		var currentClass = "current";
+		var prevClass = "prev";
+		var nextClass = "next";
+
 		if (this.state.sliding) {
-			currentSlidingClass = "current sliding " + this.state.sliding;
-			prevSlidingClass = "prev sliding " + this.state.sliding;
-			nextSlidingClass = "next sliding " + this.state.sliding;
-		} else {
-			currentSlidingClass = "current";
-			prevSlidingClass = "prev";
-			nextSlidingClass = "next";
+			currentClass += " sliding " + this.state.sliding;
+			prevClass += " sliding " + this.state.sliding;
+			nextClass += " sliding " + this.state.sliding;
 		}
 
 		return (
 			<div className="weeks">
-				<div ref="prev" className={prevSlidingClass}>
+				<div ref="prev" className={prevClass}>
 					<div className="weeks-one">{this.renderWeeks(this.state.allViews.viewPrev1)}</div>
 					<div className="weeks-two">{this.renderWeeks(this.state.allViews.viewPrev2)}</div>
 				</div>
-				<div ref="current" className={currentSlidingClass}>
+				<div ref="current" className={currentClass}>
 					<div className="weeks-one">{this.renderWeeks(this.state.allViews.viewCurrent1)}</div>
 					<div className="weeks-two">{this.renderWeeks(this.state.allViews.viewCurrent2)}</div>
 				</div>
-				<div ref="next" className={nextSlidingClass}>
+				<div ref="next" className={nextClass}>
 					<div className="weeks-one">{this.renderWeeks(this.state.allViews.viewNext1)}</div>
 					<div className="weeks-two">{this.renderWeeks(this.state.allViews.viewNext2)}</div>
 				</div>
@@ -101,7 +100,7 @@ var Weeks = React.createClass({
 
 		return starts.map(function(s, i) {
 			return (
-				<Week key={i} start={s} month={month} calendarObj={this.props.calendarObj} onSelect={self.props.onSelect} minDate={self.props.minDate} maxDate={self.props.maxDate}></Week>
+				<Week key={i} start={s} month={month} calendarObj={this.props.calendarObj} onSelect={self.props.onSelect}></Week>
 			)
 		}.bind(self));
 	},
@@ -109,9 +108,7 @@ var Weeks = React.createClass({
 	propTypes : {
 		calendarObj : React.PropTypes.object.isRequired,
 		onTransitionEnd : React.PropTypes.func.isRequired,
-		onSelect : React.PropTypes.func.isRequired,
-		minDate : React.PropTypes.object,
-		maxDate : React.PropTypes.object
+		onSelect : React.PropTypes.func.isRequired
 	}
 });
 

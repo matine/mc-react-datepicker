@@ -48,21 +48,12 @@ var Week = React.createClass({
 		if (day < selectedEnd && day > selectedStart) {
 			className += " inbetween";
 		}
-		if (this.isDisabled(day))
-			className += " disabled";
 		return className;
 	},
 
 	onSelect: function(day) {
-		if (!this.isDisabled(day) && this.props.month === day.getMonth())
+		if (this.props.month === day.getMonth())
 			this.props.onSelect(day);
-	},
-
-	isDisabled: function(day) {
-		var minDate = this.props.minDate;
-		var maxDate = this.props.maxDate;
-
-		return (minDate && DateUtilities.isBefore(day, minDate)) || (maxDate && DateUtilities.isAfter(day, maxDate));
 	},
 
 	render: function() {
@@ -82,9 +73,7 @@ var Week = React.createClass({
 		start : React.PropTypes.object.isRequired,
 		month: React.PropTypes.number.isRequired,
 		calendarObj : React.PropTypes.object.isRequired,
-		onSelect : React.PropTypes.func.isRequired,
-		minDate : React.PropTypes.object,
-		maxDate : React.PropTypes.object
+		onSelect : React.PropTypes.func.isRequired
 	}
 });
 

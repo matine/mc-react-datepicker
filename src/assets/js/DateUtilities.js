@@ -12,6 +12,10 @@ let DateUtilities =  {
 		return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 	},
 
+	isDateObj: function(date) {
+		return typeof date !== "string"
+	},
+
 	toString: function(date) {
 		return DateUtilities.pad(date.getDate().toString(), 2) + "/" + DateUtilities.pad((date.getMonth()+1).toString(), 2) + "/" + date.getFullYear();
 	},
@@ -55,6 +59,24 @@ let DateUtilities =  {
 		d.setMonth(prevMonth);
 		d.setFullYear(currentYear);
 		return d;
+	},
+
+	getAllviews: function(date) {
+		var viewPrev2 = this.getPrevMonth(date),
+			viewPrev1 = this.getPrevMonth(viewPrev2),
+			viewCurrent1 = date,
+			viewCurrent2 = this.getNextMonth(date),
+			viewNext1 = this.getNextMonth(viewCurrent2),
+			viewNext2 = this.getNextMonth(viewNext1);
+
+		return {
+			viewPrev1 : viewPrev1,
+			viewPrev2 : viewPrev2,
+			viewCurrent1 : viewCurrent1,
+			viewCurrent2 : viewCurrent2,
+			viewNext1 : viewNext1,
+			viewNext2 : viewNext2
+		}
 	},
 
 	moveToDayOfWeek: function(date, dayOfWeek) {

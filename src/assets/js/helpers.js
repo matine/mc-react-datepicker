@@ -16,10 +16,14 @@ let helpers =  {
 		return monthStrings[monthIndex];
 	},
 
-	hasSomeParentTheClass: function(element, classname) {
-		if (element.className.split(' ').indexOf(classname)>=0) return true
-		if (element.parentNode === document.body) return false
-		return element.parentNode && this.hasSomeParentTheClass(element.parentNode, classname);
+	parentsHaveClassName: function(element, className) {
+		var parent = element;
+		while (parent) {
+			if (parent.className && parent.className.indexOf(className) > -1) {
+				return true;
+			}
+			parent = parent.parentNode;
+		}
 	}
 }
 

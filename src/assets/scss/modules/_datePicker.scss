@@ -2,6 +2,11 @@
 //  DATEPICKER
 // =============================================================================
 
+$spacing: 25px;
+$monthWidth: 273px;
+$twoMonthWidth: ($monthWidth * 2) + $spacing;
+
+
 .mc-date-picker {
 	font-size: 16px;
 	font-family: Arial;
@@ -22,6 +27,10 @@
 			+ input.date-picker-trigger {
 				border-left: none;
 			}
+
+			&.active {
+				background-color: $tealLighter;
+			}
 		}
 	}
 
@@ -38,8 +47,8 @@
 
 		.calendar {
 			float: left;
-			width: 323px;
-			@include padding(25px);
+			width: 621px;
+			@include padding($spacing);
 			color: #244152;
 			overflow: hidden;
 
@@ -63,6 +72,7 @@
 			}
 
 			.month-header {
+				position: relative;
 				color: #3c3f40;
 				float: left;
 				width: 100%;
@@ -73,31 +83,45 @@
 				align-items: center;
 
 				> i {
-					font-weight: bold;
+					@include position(absolute, 0 null null 0);
 					@include padding(5px 8px);
 					cursor: pointer;
+					font-weight: bold;
 					font-style: normal;
 					font-size: 0.7em;
+
+					+ i {
+						@include position(absolute, 0 0 null auto);
+					}
 
 					&:hover {
 						background-color: $tealLight;
 						color: white;
 					}
 				}
-				> span {
+				.month-title {
+					width: $monthWidth;
+					text-align: center;
 					font-size: 18px;
 					font-weight: bold;
+					+ .month-title {
+						margin-left: $spacing;
+					}
 				}
 			}
 		}
 
 		.week-header {
 			float: left;
-			width: 100%;
+			width: $monthWidth;
 			margin-top: 8px;
 			display: table;
 			@include padding(null null 3px null);
 			@include margin(null null 3px null)
+
+			+ .week-header {
+				margin-left: $spacing;
+			}
 
 			> span {
 				float: left;
@@ -117,28 +141,37 @@
 
 			> div {
 				position: absolute;
-				width: 273px;
+				width: $twoMonthWidth;
 
 				&.current {
 					left: 0;
 				}
-				&.other {
-					left: 273px;
-					&.right {
-						left: -273px;
-					}
+				&.prev {
+					left: -$twoMonthWidth;
+				}
+				&.next {
+					left: $twoMonthWidth;
 				}
 				&.sliding {
 					transition: transform 273ms ease;
 					-webkit-transition: -webkit-transform 273ms ease;
 					&.left {
-						transform: translate3d(-273px, 0, 0);
-						-webkit-transform: translate3d(-250px, 0, 0);
+						transform: translate3d(-$twoMonthWidth, 0, 0);
+						-webkit-transform: translate3d(-$twoMonthWidth, 0, 0);
 					}
 					&.right {
-						transform: translate3d(273px, 0, 0);
-						-webkit-transform: translate3d(273px, 0, 0);
+						transform: translate3d($twoMonthWidth, 0, 0);
+						-webkit-transform: translate3d($twoMonthWidth, 0, 0);
 					}
+				}
+
+				.weeks-one,
+				.weeks-two {
+					float: left;
+					width: $monthWidth;
+				}
+				.weeks-two {
+					margin-left: $spacing;
 				}
 			}
 
@@ -203,7 +236,8 @@
 						background-color: $tealLight;
 						color: white;
 					}
-					&.selected {
+					&.selected-start,
+					&.selected-end {
 						background: $teal;
 						color: white;
 					}

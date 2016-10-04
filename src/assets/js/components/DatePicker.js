@@ -13,14 +13,14 @@ var DatePicker = React.createClass({
 
 	getInitialState: function() {
 		var def = this.props.selected || new Date();
-		var view1 = DateUtilities.clone(def);
-		var view2 = DateUtilities.getNextMonth(view1);
+		var view = DateUtilities.clone(def);
 
 		return {
-			view1: view1,
-			view2: view2,
-			selected1: "Check In",
-			selected2: "Check Out",
+			view: view,
+			selectedStart: "Check In",
+			selectedEnd: "Check Out",
+			startDateInputActive: false,
+			endDateInputActive: false,
 			minDate: null,
 			maxDate: null,
 			visible: false
@@ -29,10 +29,8 @@ var DatePicker = React.createClass({
 
 	componentDidMount: function() {
 		document.addEventListener("click", function(e) {
-			var isInCalendars = Helpers.hasSomeParentTheClass(e.target, "ardp-date-picker");
-			if ( this.state.visible && isInCalendars === false)
-				console.log(e.target.className);
-				// this.hide();
+			if (this.state.visible && e.target.className !== "date-picker-trigger" && !Helpers.parentsHaveClassName(e.target, "mc-date-picker"))
+				this.hide();
 		}.bind(this));
 	},
 
@@ -44,56 +42,92 @@ var DatePicker = React.createClass({
 		this.setState({ maxDate: date });
 	},
 
-	onSelect1: function(day) {
-		this.setState({ selected1: day });
-	},
-	onSelect2: function(day) {
-		this.setState({ selected2: day });
+	onSelect: function(day) {
+		var self = this;
+
+		if (this.state.startDateInputActive) {
+			this.setState({ selectedStart: day });
+			this.setInputHighlighting("end");
+			if (day > this.state.selectedEnd) {
+				this.setInputDateToDefault("end");
+			}
+		} else if (this.state.endDateInputActive) {
+			this.setState({ selectedEnd: day });
+			this.setInputHighlighting("none");
+			if (day < this.state.selectedStart) {
+				this.setInputDateToDefault("start");
+			}
+		} else {
+			if (day >= this.state.selectedStart) {
+				this.setState({ selectedEnd: day });
+				this.setInputHighlighting("end");
+				setTimeout( function() {
+					self.setInputHighlighting("none");
+				}, 200)
+			} else {
+				this.setState({ selectedStart: day });
+				this.setInputHighlighting("start");
+				setTimeout( function() {
+					self.setInputHighlighting("none");
+				}, 200)
+			}
+		}
 	},
 
-	setSelect1ToDefault: function() {
-		this.setState({ selected1: "Check In" });
-	},
-	setSelect2ToDefault: function() {
-		this.setState({ selected2: "Check Out" });
+	setInputDateToDefault: function(inputType) {
+		if (inputType === "start") {
+			this.setState({ selectedStart: "Check In" });
+		} else {
+			this.setState({ selectedEnd: "Check Out" });
+		}
 	},
 
-	show: function() {
+	setInputHighlighting: function(inputType) {
+		if (inputType === "start") {
+			this.setState({ startDateInputActive: true });
+			this.setState({ endDateInputActive: false });
+		} else if (inputType === "end") {
+			this.setState({ startDateInputActive: false });
+			this.setState({ endDateInputActive: true });
+		} else {
+			this.setState({ startDateInputActive: false });
+			this.setState({ endDateInputActive: false });
+		}
+	},
+
+	show: function(inputType) {
 		this.setState({ visible: true });
+		this.setInputHighlighting(inputType);
 	},
 
 	hide: function() {
 		this.setState({ visible: false });
+		this.setState({ startDateInputActive: false });
+		this.setState({ endDateInputActive: false });
 	},
 
 	render : function() {
-		var calendarObjStart = {
-			calendar: "start",
-			view: this.state.view1,
-			selected: this.state.selected1,
-			selectedOther: this.state.selected2
-		}
-		var calendarObjEnd = {
-			calendar: "end",
-			view: this.state.view2,
-			selected: this.state.selected2,
-			selectedOther: this.state.selected1
+		var calendarObj = {
+			view: this.state.view,
+			selectedStart: this.state.selectedStart,
+			selectedEnd: this.state.selectedEnd
 		}
 
-		var selected1String = calendarObjStart.selected;
-		var selected2String = calendarObjEnd.selected;
-		if (typeof calendarObjStart.selected !== "string") { selected1String = DateUtilities.toString(this.state.selected1) }
-		if (typeof calendarObjEnd.selected !== "string") { selected2String = DateUtilities.toString(this.state.selected2) }
+		var selectedStartString = calendarObj.selectedStart;
+		var selectedEndString = calendarObj.selectedEnd;
+		if (DateUtilities.isDateObj(calendarObj.selectedStart))
+				selectedStartString = DateUtilities.toString(this.state.selectedStart)
+		if (DateUtilities.isDateObj(calendarObj.selectedEnd))
+				selectedEndString = DateUtilities.toString(this.state.selectedEnd)
 
 		return (
 			<div className="mc-date-picker">
 				<div className="datepicker-inputs">
-					<input type="text" className="date-picker-trigger" readOnly="true" value={selected1String} onClick={this.show} />
-					<input type="text" className="date-picker-trigger" readOnly="true" value={selected2String} onClick={this.show} />
+					<input type="text" className={this.state.startDateInputActive ? "date-picker-trigger active" : "date-picker-trigger"} readOnly="true" value={selectedStartString} onClick={this.show.bind(null, 'start')} />
+					<input ref="endInput" type="text" className={this.state.endDateInputActive ? "date-picker-trigger active" : "date-picker-trigger"} readOnly="true" value={selectedEndString} onClick={this.show.bind(null, 'end')} />
 				</div>
 				<div className={this.state.visible ? "calendars visible" : "calendars"}>
-					<Calendar calendarObj={calendarObjStart} onSelect={this.onSelect1} minDate={this.state.minDate} maxDate={this.state.maxDate}></Calendar>
-					<Calendar calendarObj={calendarObjEnd} onSelect={this.onSelect2} minDate={this.state.minDate} maxDate={this.state.maxDate}></Calendar>
+					<Calendar calendarObj={calendarObj} onSelect={this.onSelect} minDate={this.state.minDate} maxDate={this.state.maxDate}></Calendar>
 				</div>
 			</div>
 		)

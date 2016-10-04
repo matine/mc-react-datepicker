@@ -11,13 +11,13 @@ var WeekHeader = React.createClass({
 	render : function() {
 		return (
 			<div className="week-header">
-				<span>Su</span>
 				<span>Mo</span>
 				<span>Tu</span>
 				<span>We</span>
 				<span>Th</span>
 				<span>Fr</span>
 				<span>Sa</span>
+				<span>Su</span>
 			</div>
 		)
 	},

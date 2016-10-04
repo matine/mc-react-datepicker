@@ -15,27 +15,34 @@ var Weeks = React.createClass({
 	getInitialState: function() {
 		return {
 			view: DateUtilities.clone(this.props.calendarObj.view),
-			other: DateUtilities.clone(this.props.calendarObj.view),
+			allViews: DateUtilities.getAllviews(this.props.calendarObj.view),
 			sliding: null
 		};
 	},
 
-	componentDidMount: function() {
+	componentDidUpdate: function() {
 		ReactDOM.findDOMNode(this.refs.current).addEventListener("transitionend", this.onTransitionEnd);
 	},
 
 	onTransitionEnd: function() {
+		var view = this.state.view;
+		var newCurrentView;
+		if (this.state.sliding === "right") {
+			newCurrentView = DateUtilities.clone(this.state.allViews.viewPrev2);
+		} else {
+			newCurrentView = DateUtilities.clone(this.state.allViews.viewCurrent2);
+		}
 		this.setState({
 			sliding: null,
-			view: DateUtilities.clone(this.state.other)
+			view: newCurrentView,
+			allViews: DateUtilities.getAllviews(newCurrentView)
 		});
-
 		this.props.onTransitionEnd();
 	},
 
 	getWeekStartDates: function(view) {
 		view.setDate(1);
-		view = DateUtilities.moveToDayOfWeek(DateUtilities.clone(view), 0);
+		view = DateUtilities.moveToDayOfWeek(DateUtilities.clone(view), 1);
 
 		var current = DateUtilities.clone(view);
 		current.setDate(current.getDate()+7);
@@ -47,31 +54,42 @@ var Weeks = React.createClass({
 			starts.push(DateUtilities.clone(current));
 			current.setDate(current.getDate()+7);
 		}
-
 		return starts;
 	},
 
 	moveTo: function(view, isForward) {
 		this.setState({
 			sliding: isForward ? "left" : "right",
-			other: DateUtilities.clone(view)
+			view: isForward ? DateUtilities.clone(this.state.allViews.viewNext1) : DateUtilities.clone(this.state.allViews.viewPrev1)
 		});
 	},
 
 	render: function() {
-		var currentSlidingClass, otherSlidingClass;
+		var currentSlidingClass, prevSlidingClass, nextSlidingClass;
 		if (this.state.sliding) {
 			currentSlidingClass = "current sliding " + this.state.sliding;
-			otherSlidingClass = "other sliding " + this.state.sliding;
+			prevSlidingClass = "prev sliding " + this.state.sliding;
+			nextSlidingClass = "next sliding " + this.state.sliding;
 		} else {
 			currentSlidingClass = "current";
-			otherSlidingClass = "other";
+			prevSlidingClass = "prev";
+			nextSlidingClass = "next";
 		}
 
 		return (
 			<div className="weeks">
-				<div ref="current" className={currentSlidingClass}>{this.renderWeeks(this.state.view)}</div>
-				<div ref="other" className={otherSlidingClass}>{this.renderWeeks(this.state.other)}</div>
+				<div ref="prev" className={prevSlidingClass}>
+					<div className="weeks-one">{this.renderWeeks(this.state.allViews.viewPrev1)}</div>
+					<div className="weeks-two">{this.renderWeeks(this.state.allViews.viewPrev2)}</div>
+				</div>
+				<div ref="current" className={currentSlidingClass}>
+					<div className="weeks-one">{this.renderWeeks(this.state.allViews.viewCurrent1)}</div>
+					<div className="weeks-two">{this.renderWeeks(this.state.allViews.viewCurrent2)}</div>
+				</div>
+				<div ref="next" className={nextSlidingClass}>
+					<div className="weeks-one">{this.renderWeeks(this.state.allViews.viewNext1)}</div>
+					<div className="weeks-two">{this.renderWeeks(this.state.allViews.viewNext2)}</div>
+				</div>
 			</div>
 		)
 	},

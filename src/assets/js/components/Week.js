@@ -26,26 +26,35 @@ var Week = React.createClass({
 	},
 
 	getDayClassName: function(day) {
+		var selectedStart = this.props.calendarObj.selectedStart;
+		var selectedEnd = this.props.calendarObj.selectedEnd;
+
 		var className = "day";
+		// If 'day' is today, give classname 'today'
 		if (DateUtilities.isSameDay(day, new Date()))
 			className += " today";
+		// If 'day' is a different month, give classname 'other-month'
 		if (this.props.month !== day.getMonth())
 			className += " other-month";
-		if (typeof this.props.calendarObj.selected !== "string" && DateUtilities.isSameDay(day, this.props.calendarObj.selected))
-			className += " selected";
+		// If 'day' is selectedStart, give classname 'selected-start'
+		if (DateUtilities.isDateObj(selectedStart) && DateUtilities.isSameDay(day, selectedStart)) {
+			className += " selected-start";
+		}
+		// If 'day' is selectedEnd, give classname 'selected-end'
+		if (DateUtilities.isDateObj(selectedEnd) && DateUtilities.isSameDay(day, selectedEnd)) {
+			className += " selected-end";
+		}
+		// If 'day' is between selectedStart and selectedEnd, give classname 'inbetween'
+		if (day < selectedEnd && day > selectedStart) {
+			className += " inbetween";
+		}
 		if (this.isDisabled(day))
 			className += " disabled";
-		if (this.props.calendarObj.calendar === "start" && (day > this.props.calendarObj.selected && day <= this.props.calendarObj.selectedOther)) {
-			className += " inbetween";
-		}
-		if (this.props.calendarObj.calendar === "end" && (day < this.props.calendarObj.selected && day >= this.props.calendarObj.selectedOther)) {
-			className += " inbetween";
-		}
 		return className;
 	},
 
 	onSelect: function(day) {
-		if (!this.isDisabled(day) && !this.isWithinDateRange(day) && this.props.month === day.getMonth())
+		if (!this.isDisabled(day) && this.props.month === day.getMonth())
 			this.props.onSelect(day);
 	},
 
@@ -56,14 +65,14 @@ var Week = React.createClass({
 		return (minDate && DateUtilities.isBefore(day, minDate)) || (maxDate && DateUtilities.isAfter(day, maxDate));
 	},
 
-	isWithinDateRange: function(day) {
-		if (this.props.calendarObj.calendar === "end" && this.props.calendarObj.selectedOther !== "string") {
-			return this.props.calendarObj.selectedOther > day
-		}
-		if (this.props.calendarObj.calendar === "start" && this.props.calendarObj.selectedOther !== "string") {
-			return this.props.calendarObj.selectedOther < day
-		}
-	},
+	// isWithinDateRange: function(day) {
+	// 	if (this.props.calendarObj.calendar === "end" && this.props.calendarObj.selectedOther !== "string") {
+	// 		return this.props.calendarObj.selectedOther > day
+	// 	}
+	// 	if (this.props.calendarObj.calendar === "start" && this.props.calendarObj.selectedOther !== "string") {
+	// 		return this.props.calendarObj.selectedOther < day
+	// 	}
+	// },
 
 	render: function() {
 		var days = this.buildDays(this.props.start);
@@ -79,6 +88,8 @@ var Week = React.createClass({
 	},
 
 	propTypes : {
+		start : React.PropTypes.object.isRequired,
+		month: React.PropTypes.number.isRequired,
 		calendarObj : React.PropTypes.object.isRequired,
 		onSelect : React.PropTypes.func.isRequired,
 		minDate : React.PropTypes.object,

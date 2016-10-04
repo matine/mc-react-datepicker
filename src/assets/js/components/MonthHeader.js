@@ -17,22 +17,19 @@ var MonthHeader = React.createClass({
 		};
 	},
 
-	moveBackward: function() {
-		var view = DateUtilities.clone(this.state.view);
-		view.setMonth(view.getMonth()-1);
-		this.move(view, false);
-	},
-
 	moveForward: function() {
 		var view = DateUtilities.clone(this.state.view);
-		view.setMonth(view.getMonth()+1);
+		view = DateUtilities.getNextMonth(view),
 		this.move(view, true);
 	},
 
-	move: function(view, isForward) {
-		// if (!this.state.enabled)
-		// 	return;
+	moveBackward: function() {
+		var view = DateUtilities.clone(this.state.view);
+		view = DateUtilities.getPrevMonth(view),
+		this.move(view, false);
+	},
 
+	move: function(view, isForward) {
 		this.setState({
 			view: view,
 			enabled: false
@@ -51,8 +48,9 @@ var MonthHeader = React.createClass({
 		return (
 			<div className="month-header">
 				<i className={enabled ? "" : " disabled"} onClick={this.moveBackward}>{String.fromCharCode(9664)}</i>
-				<span>{DateUtilities.toMonthAndYearString(this.state.view)}</span>
 				<i className={enabled ? "" : " disabled"} onClick={this.moveForward}>{String.fromCharCode(9654)}</i>
+				<span className="month-title">{DateUtilities.toMonthAndYearString(this.state.view)}</span>
+				<span className="month-title">{DateUtilities.toMonthAndYearString(DateUtilities.getNextMonth(this.state.view))}</span>
 			</div>
 		)
 	},

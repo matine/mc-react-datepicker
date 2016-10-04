@@ -36,6 +36,10 @@ var Week = React.createClass({
 		// If 'day' is a different month, give classname 'other-month'
 		if (this.props.month !== day.getMonth())
 			className += " other-month";
+		// If 'day' is last of the month, give classname 'last-day'
+		if (DateUtilities.isLastDayOfMonth(day)) {
+			className += " last-day";
+		}
 		// If 'day' is selectedStart, give classname 'selected-start'
 		if (DateUtilities.isDateObj(selectedStart) && DateUtilities.isSameDay(day, selectedStart)) {
 			className += " selected-start";

@@ -91,6 +91,12 @@ let DateUtilities =  {
 
 	isAfter: function(first, second) {
 		return first.getTime() > second.getTime();
+	},
+
+	isLastDayOfMonth: function(day) {
+		var test = new Date(day.getTime());
+		test.setDate(test.getDate() + 1);
+		return test.getDate() === 1;
 	}
 }
 

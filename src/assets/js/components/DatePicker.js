@@ -115,10 +115,8 @@ var DatePicker = React.createClass({
 
 		var selectedStartString = calendarObj.selectedStart;
 		var selectedEndString = calendarObj.selectedEnd;
-		if (DateUtilities.isDateObj(calendarObj.selectedStart))
-				selectedStartString = DateUtilities.toString(this.state.selectedStart)
-		if (DateUtilities.isDateObj(calendarObj.selectedEnd))
-				selectedEndString = DateUtilities.toString(this.state.selectedEnd)
+		if (DateUtilities.isDateObj(calendarObj.selectedStart)) selectedStartString = DateUtilities.toString(this.state.selectedStart)
+		if (DateUtilities.isDateObj(calendarObj.selectedEnd)) selectedEndString = DateUtilities.toString(this.state.selectedEnd)
 
 		return (
 			<div className="mc-date-picker">

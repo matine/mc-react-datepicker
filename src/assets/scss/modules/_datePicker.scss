@@ -4,7 +4,9 @@
 
 $spacing: 25px;
 $monthWidth: 273px;
+$monthWidthAndSpacing: $monthWidth + $spacing;
 $twoMonthWidth: ($monthWidth * 2) + $spacing;
+$twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 
 
 .mc-date-picker {
@@ -147,21 +149,21 @@ $twoMonthWidth: ($monthWidth * 2) + $spacing;
 					left: 0;
 				}
 				&.prev {
-					left: -$twoMonthWidth;
+					left: -$twoMonthWidthAndSpacing;
 				}
 				&.next {
-					left: $twoMonthWidth;
+					left: $twoMonthWidthAndSpacing;
 				}
 				&.sliding {
-					transition: transform 273ms ease;
-					-webkit-transition: -webkit-transform 273ms ease;
+					transition: transform 500ms ease;
+					-webkit-transition: -webkit-transform 500ms ease;
 					&.left {
-						transform: translate3d(-$twoMonthWidth, 0, 0);
-						-webkit-transform: translate3d(-$twoMonthWidth, 0, 0);
+						transform: translate3d(-$monthWidthAndSpacing, 0, 0);
+						-webkit-transform: translate3d(-$monthWidthAndSpacing, 0, 0);
 					}
 					&.right {
-						transform: translate3d($twoMonthWidth, 0, 0);
-						-webkit-transform: translate3d($twoMonthWidth, 0, 0);
+						transform: translate3d($monthWidthAndSpacing, 0, 0);
+						-webkit-transform: translate3d($monthWidthAndSpacing, 0, 0);
 					}
 				}
 

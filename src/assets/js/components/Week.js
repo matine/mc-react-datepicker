@@ -65,15 +65,6 @@ var Week = React.createClass({
 		return (minDate && DateUtilities.isBefore(day, minDate)) || (maxDate && DateUtilities.isAfter(day, maxDate));
 	},
 
-	// isWithinDateRange: function(day) {
-	// 	if (this.props.calendarObj.calendar === "end" && this.props.calendarObj.selectedOther !== "string") {
-	// 		return this.props.calendarObj.selectedOther > day
-	// 	}
-	// 	if (this.props.calendarObj.calendar === "start" && this.props.calendarObj.selectedOther !== "string") {
-	// 		return this.props.calendarObj.selectedOther < day
-	// 	}
-	// },
-
 	render: function() {
 		var days = this.buildDays(this.props.start);
 		var self = this;

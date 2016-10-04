@@ -30,6 +30,9 @@ var MonthHeader = React.createClass({
 	},
 
 	move: function(view, isForward) {
+		if (!this.state.enabled)
+			return;
+
 		this.setState({
 			view: view,
 			enabled: false

@@ -52,7 +52,7 @@ let DateUtilities =  {
 		if (currentMonth > 0) {
 			prevMonth = currentMonth - 1;
 		} else {
-			prevMonth = 12;
+			prevMonth = 11;
 			currentYear--;
 		}
 		var d = new Date();

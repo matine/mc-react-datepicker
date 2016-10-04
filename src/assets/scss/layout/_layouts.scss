@@ -4,5 +4,8 @@
 
 body {
 	background-color: $light-gray;
-	padding: 20px;
+	padding: 10px;
+	@include media($xsmall) {
+		padding: 20px;
+	}
 }

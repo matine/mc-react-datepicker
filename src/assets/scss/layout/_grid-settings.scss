@@ -9,11 +9,13 @@ $padding-lr: 0em;
 $gutter: $padding-lr;
 $max-width: 95rem;
 
+$xsmall-screen: 25em;
 $small-screen: 40em;
 $medium-screen: 50em;
 $large-screen: 64em;
 
 $xsmall-only: new-breakpoint(max-width 39.99em);
+$xsmall: new-breakpoint(min-width $xsmall-screen);
 
 $small-only: new-breakpoint(min-width $small-screen max-width 49.99em);
 $small: new-breakpoint(min-width $small-screen);

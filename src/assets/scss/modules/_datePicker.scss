@@ -19,7 +19,7 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 
 		input.date-picker-trigger {
 			cursor: text;
-			width: auto;
+			width: 150px;
 			float: left;
 			font-size: 14px;
 			color: #484848;
@@ -49,10 +49,17 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 
 		.calendar {
 			float: left;
-			width: 621px;
-			@include padding($spacing);
+			width: 299px;
+			@include padding(13px);
 			color: #244152;
 			overflow: hidden;
+			@include media($xsmall) {
+				width: 323px;
+				@include padding($spacing);
+			}
+			@include media($small) {
+				width: 621px;
+			}
 
 			+ .calendar {
 				@include padding(null null null 0);
@@ -108,6 +115,10 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 					font-weight: bold;
 					+ .month-title {
 						margin-left: $spacing;
+						display: none;
+						@include media($small) {
+							display: block;
+						}
 					}
 				}
 			}
@@ -123,6 +134,10 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 
 			+ .week-header {
 				margin-left: $spacing;
+				display: none;
+				@include media($small) {
+					display: block;
+				}
 			}
 
 			> span {

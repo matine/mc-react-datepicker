@@ -1,4 +1,4 @@
-# Nutrition Calculator!
+# Date Picker
 
 ## To install:
 
@@ -7,5 +7,3 @@
 ## To run:
 
 `gulp`
-
-## The Guts

@@ -5,9 +5,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
 import DateUtilities from '../DateUtilities';
-import classNames from 'classNames';
 import MonthHeader from './MonthHeader';
 import WeekHeader from './WeekHeader';
 import Weeks from './Weeks';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-let helpers =  {
+let Helpers =  {
 
 	isObjectEmpty : function(obj) {
 		for(var prop in obj) {
@@ -27,14 +27,4 @@ let helpers =  {
 	}
 }
 
-Array.prototype.getValueCount = function( search ) {
-
-	var count = 0;
-	for( var i=0; i<this.length; i++ ) {
-		if( this[i] == search )
-			count++;
-	}
-	return count;
-}
-
-export default helpers;
+export default Helpers;

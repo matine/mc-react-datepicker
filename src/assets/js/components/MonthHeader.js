@@ -6,7 +6,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DateUtilities from '../DateUtilities';
-import classNames from 'classNames';
 
 var MonthHeader = React.createClass({
 

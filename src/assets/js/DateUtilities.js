@@ -62,20 +62,16 @@ let DateUtilities =  {
 	},
 
 	getAllviews: function(date) {
-		var viewPrev2 = this.getPrevMonth(date),
-			viewPrev1 = this.getPrevMonth(viewPrev2),
+		var viewPrev = this.getPrevMonth(date),
 			viewCurrent1 = date,
 			viewCurrent2 = this.getNextMonth(date),
-			viewNext1 = this.getNextMonth(viewCurrent2),
-			viewNext2 = this.getNextMonth(viewNext1);
+			viewNext = this.getNextMonth(viewCurrent2);
 
 		return {
-			viewPrev1 : viewPrev1,
-			viewPrev2 : viewPrev2,
+			viewPrev : viewPrev,
 			viewCurrent1 : viewCurrent1,
 			viewCurrent2 : viewCurrent2,
-			viewNext1 : viewNext1,
-			viewNext2 : viewNext2
+			viewNext : viewNext
 		}
 	},
 

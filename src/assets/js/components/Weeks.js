@@ -27,7 +27,7 @@ var Weeks = React.createClass({
 		var view = this.state.view;
 		var newCurrentView;
 		if (this.state.sliding === "right") {
-			newCurrentView = DateUtilities.clone(this.state.allViews.viewPrev2);
+			newCurrentView = DateUtilities.clone(this.state.allViews.viewPrev);
 		} else {
 			newCurrentView = DateUtilities.clone(this.state.allViews.viewCurrent2);
 		}
@@ -59,7 +59,7 @@ var Weeks = React.createClass({
 	moveTo: function(view, isForward) {
 		this.setState({
 			sliding: isForward ? "left" : "right",
-			view: isForward ? DateUtilities.clone(this.state.allViews.viewNext1) : DateUtilities.clone(this.state.allViews.viewPrev1)
+			view: isForward ? DateUtilities.clone(this.state.allViews.viewNext) : DateUtilities.clone(this.state.allViews.viewPrev)
 		});
 	},
 
@@ -76,18 +76,12 @@ var Weeks = React.createClass({
 
 		return (
 			<div className="weeks">
-				<div ref="prev" className={prevClass}>
-					<div className="weeks-one">{this.renderWeeks(this.state.allViews.viewPrev1)}</div>
-					<div className="weeks-two">{this.renderWeeks(this.state.allViews.viewPrev2)}</div>
-				</div>
+				<div className={prevClass}>{this.renderWeeks(this.state.allViews.viewPrev)}</div>
 				<div ref="current" className={currentClass}>
 					<div className="weeks-one">{this.renderWeeks(this.state.allViews.viewCurrent1)}</div>
 					<div className="weeks-two">{this.renderWeeks(this.state.allViews.viewCurrent2)}</div>
 				</div>
-				<div ref="next" className={nextClass}>
-					<div className="weeks-one">{this.renderWeeks(this.state.allViews.viewNext1)}</div>
-					<div className="weeks-two">{this.renderWeeks(this.state.allViews.viewNext2)}</div>
-				</div>
+				<div className={nextClass}>{this.renderWeeks(this.state.allViews.viewNext)}</div>
 			</div>
 		)
 	},

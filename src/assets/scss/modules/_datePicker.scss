@@ -158,13 +158,17 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 
 			> div {
 				position: absolute;
-				width: $twoMonthWidth;
 
 				&.current {
 					left: 0;
+					width: $twoMonthWidth;
+				}
+				&.prev,
+				&.next {
+					width: $monthWidth;
 				}
 				&.prev {
-					left: -$twoMonthWidthAndSpacing;
+					left: -$monthWidthAndSpacing;
 				}
 				&.next {
 					left: $twoMonthWidthAndSpacing;

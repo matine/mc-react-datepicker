@@ -14,7 +14,7 @@ var DatePicker = React.createClass({
 	getInitialState: function() {
 		var def = this.props.selected || new Date();
 		var view = DateUtilities.clone(def);
-		var defaultColorTheme = this.defaultColorThemeObj();
+		var defaultConfig = this.defaultConfigObj();
 
 		return {
 			view: view,
@@ -23,7 +23,7 @@ var DatePicker = React.createClass({
 			startDateInputActive: false,
 			endDateInputActive: false,
 			visible: false,
-			defaultColorTheme: defaultColorTheme
+			defaultConfig: defaultConfig
 		};
 	},
 
@@ -34,11 +34,33 @@ var DatePicker = React.createClass({
 		}.bind(this));
 	},
 
-	defaultColorThemeObj: function() {
+	defaultConfigObj: function() {
+		// Set up colors for default theme
+		var textGray = "#565a5c",
+			teal = "#66e2da",
+			lightTeal = "#99ede6",
+			darkTeal = "#00a699";
+
+		// Return full default config object
 		return {
-			today: "red",
-			inputActiveBackground: "#99ede6",
-			inputActiveColor: "#484848"
+			theme : {
+				inputs : {
+					activeBackgroundColor: lightTeal,
+					activeColor: textGray
+				},
+				days : {
+					dayBackgroundColor: "white",
+					dayColor: textGray,
+					hoverBackgroundColor: teal,
+					hoverColor: textGray,
+					selectedBackgroundColor: darkTeal,
+					selectedColor: "white",
+					todayBackgroundColor: "#f2f2f2",
+					todayColor: textGray,
+					inBetweenBackgroundColor: lightTeal,
+					inBetweenColor: textGray
+				}
+			}
 		}
 	},
 
@@ -107,21 +129,32 @@ var DatePicker = React.createClass({
 	},
 
 	render : function() {
+		// Create object to pass through Calendar component
 		var calendarObj = {
 			view: this.state.view,
 			selectedStart: this.state.selectedStart,
 			selectedEnd: this.state.selectedEnd
 		}
+		// Creat config objects to pass through Calendar component
+		var configs = {
+			defaultTheme: this.state.defaultConfig.theme,
+			userTheme: this.props.userConfig.theme
+		}
 
+		// Get default and user configuration for the input fields
+		var defaultThemeInputs = this.state.defaultConfig.theme.inputs;
+		var userThemeInputs = this.props.userConfig.theme.inputs;
+
+		// Create style objects for input fields, using default config if user has not provided any
 		var inputActiveStyle = {
-			color: this.props.userColorTheme.inputActiveColor ? this.props.userColorTheme.inputActiveColor : this.state.defaultColorTheme.inputActiveColor,
-			backgroundColor: this.props.userColorTheme.inputActiveBackground ? this.props.userColorTheme.inputActiveBackground : this.state.defaultColorTheme.inputActiveBackground
+			color: userThemeInputs.activeColor ? userThemeInputs.activeColor : defaultThemeInputs.activeColor,
+			backgroundColor: userThemeInputs.activeBackgroundColor ? userThemeInputs.activeBackgroundColor : defaultThemeInputs.activeBackgroundColor
 		};
 		var inputInactiveStyle = {
 			backgroundColor: "white"
 		};
 
-
+		// Create strings to use as value for inputs, by using default string or turning date obj into string if exists
 		var selectedStartString = calendarObj.selectedStart;
 		var selectedEndString = calendarObj.selectedEnd;
 		if (DateUtilities.isDateObj(calendarObj.selectedStart)) selectedStartString = DateUtilities.toString(this.state.selectedStart)
@@ -131,17 +164,17 @@ var DatePicker = React.createClass({
 			<div className="mc-date-picker">
 				<div className="datepicker-inputs">
 					<input type="text" className="date-picker-trigger" style={this.state.startDateInputActive ? inputActiveStyle : inputInactiveStyle} readOnly="true" value={selectedStartString} onClick={this.show.bind(null, 'start')} />
-					<input ref="endInput" type="text" className={this.state.endDateInputActive ? "date-picker-trigger active" : "date-picker-trigger"} readOnly="true" value={selectedEndString} onClick={this.show.bind(null, 'end')} />
+					<input ref="endInput" type="text" className={"date-picker-trigger"} style={this.state.endDateInputActive ? inputActiveStyle : inputInactiveStyle} readOnly="true" value={selectedEndString} onClick={this.show.bind(null, 'end')} />
 				</div>
 				<div className={this.state.visible ? "calendars visible" : "calendars"}>
-					<Calendar calendarObj={calendarObj} onSelect={this.onSelect}></Calendar>
+					<Calendar calendarObj={calendarObj} configs={configs} onSelect={this.onSelect}></Calendar>
 				</div>
 			</div>
 		)
 	},
 
 	propTypes : {
-		userColorTheme : React.PropTypes.object
+		userConfig : React.PropTypes.object
 	}
 });
 

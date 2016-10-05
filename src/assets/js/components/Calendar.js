@@ -25,13 +25,14 @@ var Calendar = React.createClass({
 			<div className="calendar">
 				<MonthHeader ref="monthHeader" view={this.props.calendarObj.view} onMove={this.onMove}></MonthHeader>
 				<WeekHeader ref="weekHeader"></WeekHeader><WeekHeader ref="weekHeader"></WeekHeader>
-				<Weeks ref="weeks" calendarObj={this.props.calendarObj} onTransitionEnd={this.onTransitionEnd} onSelect={this.props.onSelect}></Weeks>
+				<Weeks ref="weeks" calendarObj={this.props.calendarObj} configs={this.props.configs} onTransitionEnd={this.onTransitionEnd} onSelect={this.props.onSelect}></Weeks>
 			</div>
 		)
 	},
 
 	propTypes : {
 		calendarObj : React.PropTypes.object.isRequired,
+		configs : React.PropTypes.object.isRequired,
 		onSelect : React.PropTypes.func.isRequired
 	}
 });

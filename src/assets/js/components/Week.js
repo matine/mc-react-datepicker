@@ -25,11 +25,19 @@ var Week = React.createClass({
 		return this.props.month !== day.month();
 	},
 
-	getDayClassName: function(day) {
+	getDayClassAndStyle: function(day) {
 		var selectedStart = this.props.calendarObj.selectedStart;
 		var selectedEnd = this.props.calendarObj.selectedEnd;
 
+		var defaultThemeDays = this.props.configs.defaultTheme.days;
+		var userThemeDays = this.props.configs.userTheme.days;
+
+		// var styles = {
+		// 	color: defaultThemeDays.dayColor,
+		// 	backgroundColor: defaultThemeDays.dayBackgroundColor
+		// }
 		var className = "day";
+
 		// If 'day' is today, give classname 'today'
 		if (DateUtilities.isSameDay(day, new Date()))
 			className += " today";
@@ -52,7 +60,9 @@ var Week = React.createClass({
 		if (day < selectedEnd && day > selectedStart) {
 			className += " inbetween";
 		}
-		return className;
+		return {
+			className: className
+		}
 	},
 
 	onSelect: function(day) {
@@ -66,8 +76,9 @@ var Week = React.createClass({
 
 		return (
 			<div className="week">
-				{days.map(function(day, i){
-					return <div key={i} onClick={self.onSelect.bind(null, day)} className={self.getDayClassName(day)}>{DateUtilities.toDayOfMonthString(day)}</div>
+				{days.map(function(day, i) {
+					{var classAndStyle = self.getDayClassAndStyle(day)}
+					return <div key={i} onClick={self.onSelect.bind(null, day)} className={classAndStyle.className}>{DateUtilities.toDayOfMonthString(day)}</div>
 				}.bind(self))}
 			</div>
 		)
@@ -77,6 +88,7 @@ var Week = React.createClass({
 		start : React.PropTypes.object.isRequired,
 		month: React.PropTypes.number.isRequired,
 		calendarObj : React.PropTypes.object.isRequired,
+		configs : React.PropTypes.object.isRequired,
 		onSelect : React.PropTypes.func.isRequired
 	}
 });

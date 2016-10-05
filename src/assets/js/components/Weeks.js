@@ -93,13 +93,14 @@ var Weeks = React.createClass({
 
 		return starts.map(function(s, i) {
 			return (
-				<Week key={i} start={s} month={month} calendarObj={this.props.calendarObj} onSelect={self.props.onSelect}></Week>
+				<Week key={i} start={s} month={month} calendarObj={this.props.calendarObj} configs={this.props.configs} onSelect={self.props.onSelect}></Week>
 			)
 		}.bind(self));
 	},
 
 	propTypes : {
 		calendarObj : React.PropTypes.object.isRequired,
+		configs : React.PropTypes.object.isRequired,
 		onTransitionEnd : React.PropTypes.func.isRequired,
 		onSelect : React.PropTypes.func.isRequired
 	}

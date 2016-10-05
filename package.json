@@ -1,12 +1,17 @@
 {
-  "name": "dominos-nutrition-calculator",
+  "name": "mc-react-datepicker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/assets/js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Matine Chabrier",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/matine/mc-react-datepicker.git"
+  },
+  "browserify": { "transform": [ "babelify" ] },
   "license": "ISC",
   "devDependencies": {
     "autobind-decorator": "1.3.2",

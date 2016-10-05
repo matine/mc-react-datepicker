@@ -10,9 +10,17 @@ import DatePicker from './DatePicker';
 var App = React.createClass({
 
 	render : function() {
+
+		var colorThemeObj = {
+			// today: "red",
+			inputActiveBackground: "blue",
+			inputActiveColor: "white"
+		}
+
 		return (
 			<div>
-				<DatePicker></DatePicker>
+				I am a react app
+				<DatePicker userColorTheme={colorThemeObj}></DatePicker>
 			</div>
 		)
 	}

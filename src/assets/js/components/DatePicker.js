@@ -14,6 +14,7 @@ var DatePicker = React.createClass({
 	getInitialState: function() {
 		var def = this.props.selected || new Date();
 		var view = DateUtilities.clone(def);
+		var defaultColorTheme = this.defaultColorThemeObj();
 
 		return {
 			view: view,
@@ -21,7 +22,8 @@ var DatePicker = React.createClass({
 			selectedEnd: "Check Out",
 			startDateInputActive: false,
 			endDateInputActive: false,
-			visible: false
+			visible: false,
+			defaultColorTheme: defaultColorTheme
 		};
 	},
 
@@ -30,6 +32,14 @@ var DatePicker = React.createClass({
 			if (this.state.visible && e.target.className !== "date-picker-trigger" && !Helpers.parentsHaveClassName(e.target, "mc-date-picker"))
 				this.hide();
 		}.bind(this));
+	},
+
+	defaultColorThemeObj: function() {
+		return {
+			today: "red",
+			inputActiveBackground: "#99ede6",
+			inputActiveColor: "#484848"
+		}
 	},
 
 	onSelect: function(day) {
@@ -103,6 +113,15 @@ var DatePicker = React.createClass({
 			selectedEnd: this.state.selectedEnd
 		}
 
+		var inputActiveStyle = {
+			color: this.props.userColorTheme.inputActiveColor ? this.props.userColorTheme.inputActiveColor : this.state.defaultColorTheme.inputActiveColor,
+			backgroundColor: this.props.userColorTheme.inputActiveBackground ? this.props.userColorTheme.inputActiveBackground : this.state.defaultColorTheme.inputActiveBackground
+		};
+		var inputInactiveStyle = {
+			backgroundColor: "white"
+		};
+
+
 		var selectedStartString = calendarObj.selectedStart;
 		var selectedEndString = calendarObj.selectedEnd;
 		if (DateUtilities.isDateObj(calendarObj.selectedStart)) selectedStartString = DateUtilities.toString(this.state.selectedStart)
@@ -111,7 +130,7 @@ var DatePicker = React.createClass({
 		return (
 			<div className="mc-date-picker">
 				<div className="datepicker-inputs">
-					<input type="text" className={this.state.startDateInputActive ? "date-picker-trigger active" : "date-picker-trigger"} readOnly="true" value={selectedStartString} onClick={this.show.bind(null, 'start')} />
+					<input type="text" className="date-picker-trigger" style={this.state.startDateInputActive ? inputActiveStyle : inputInactiveStyle} readOnly="true" value={selectedStartString} onClick={this.show.bind(null, 'start')} />
 					<input ref="endInput" type="text" className={this.state.endDateInputActive ? "date-picker-trigger active" : "date-picker-trigger"} readOnly="true" value={selectedEndString} onClick={this.show.bind(null, 'end')} />
 				</div>
 				<div className={this.state.visible ? "calendars visible" : "calendars"}>
@@ -121,7 +140,9 @@ var DatePicker = React.createClass({
 		)
 	},
 
-	propTypes : {}
+	propTypes : {
+		userColorTheme : React.PropTypes.object
+	}
 });
 
 export default DatePicker;

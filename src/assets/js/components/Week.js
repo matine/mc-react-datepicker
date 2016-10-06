@@ -6,6 +6,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DateUtilities from '../DateUtilities';
+import Radium from 'radium';
+
 
 var Week = React.createClass({
 
@@ -29,21 +31,21 @@ var Week = React.createClass({
 		var selectedStart = this.props.calendarObj.selectedStart;
 		var selectedEnd = this.props.calendarObj.selectedEnd;
 
-		var defaultThemeDays = this.props.configs.defaultTheme.days;
-		var userThemeDays = this.props.configs.userTheme.days;
+		var configThemeDays = this.props.config.theme.days;
 
-		// var styles = {
-		// 	color: defaultThemeDays.dayColor,
-		// 	backgroundColor: defaultThemeDays.dayBackgroundColor
-		// }
+		var styles = {
+			color: null,
+			backgroundColor: null
+		}
 		var className = "day";
 
 		// If 'day' is today, give classname 'today'
-		if (DateUtilities.isSameDay(day, new Date()))
+		if (DateUtilities.isSameDay(day, new Date())) {
 			className += " today";
-		// If 'day' is a different month, give classname 'other-month'
-		if (this.props.month !== day.getMonth())
-			className += " other-month";
+		// If 'day' is in the past, give classname 'disabled'
+		} else if (day < new Date()) {
+			className += " disabled";
+		}
 		// If 'day' is last of the month, give classname 'last-day'
 		if (DateUtilities.isLastDayOfMonth(day)) {
 			className += " last-day";
@@ -51,17 +53,36 @@ var Week = React.createClass({
 		// If 'day' is selectedStart, give classname 'selected-start'
 		if (DateUtilities.isDateObj(selectedStart) && DateUtilities.isSameDay(day, selectedStart)) {
 			className += " selected-start";
+			styles.color = configThemeDays.selectedColor;
+			styles.backgroundColor = configThemeDays.selectedBackgroundColor;
+			if (this.props.month !== day.getMonth()) {
+				styles.color = null;
+				styles.backgroundColor = null;
+			}
 		}
 		// If 'day' is selectedEnd, give classname 'selected-end'
 		if (DateUtilities.isDateObj(selectedEnd) && DateUtilities.isSameDay(day, selectedEnd)) {
 			className += " selected-end";
+			styles.color = configThemeDays.selectedColor;
+			styles.backgroundColor = configThemeDays.selectedBackgroundColor;
+			if (this.props.month !== day.getMonth()) {
+				styles.color = null;
+				styles.backgroundColor = null;
+			}
 		}
-		// If 'day' is between selectedStart and selectedEnd, give classname 'inbetween'
-		if (day < selectedEnd && day > selectedStart) {
+		// If 'day' is a different month, give classname 'other-month'
+		if (this.props.month !== day.getMonth())
+			className += " other-month";
+		// If 'day' is between selectedStart and selectedEnd, and is same month give classname 'inbetween'
+		if (day < selectedEnd && day > selectedStart && this.props.month === day.getMonth()) {
 			className += " inbetween";
+			styles.color = configThemeDays.inbetweenColor;
+			styles.backgroundColor = configThemeDays.inbetweenBackgroundColor;
 		}
+
 		return {
-			className: className
+			className: className,
+			styles: styles
 		}
 	},
 
@@ -78,7 +99,7 @@ var Week = React.createClass({
 			<div className="week">
 				{days.map(function(day, i) {
 					{var classAndStyle = self.getDayClassAndStyle(day)}
-					return <div key={i} onClick={self.onSelect.bind(null, day)} className={classAndStyle.className}>{DateUtilities.toDayOfMonthString(day)}</div>
+					return <div key={i} onClick={self.onSelect.bind(null, day)} className={classAndStyle.className} style={classAndStyle.styles}>{DateUtilities.toDayOfMonthString(day)}</div>
 				}.bind(self))}
 			</div>
 		)
@@ -88,7 +109,7 @@ var Week = React.createClass({
 		start : React.PropTypes.object.isRequired,
 		month: React.PropTypes.number.isRequired,
 		calendarObj : React.PropTypes.object.isRequired,
-		configs : React.PropTypes.object.isRequired,
+		config : React.PropTypes.object.isRequired,
 		onSelect : React.PropTypes.func.isRequired
 	}
 });

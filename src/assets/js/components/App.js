@@ -29,17 +29,14 @@ var App = React.createClass({
 					hoverColor: textGray,
 					selectedBackgroundColor: darkCoral,
 					selectedColor: "white",
-					todayBackgroundColor: "#f2f2f2",
-					todayColor: textGray,
-					inBetweenBackgroundColor: lightCoral,
-					inBetweenColor: textGray
+					inbetweenBackgroundColor: lightCoral,
+					inbetweenColor: textGray
 				}
 			}
 		}
 
 		return (
 			<div>
-				I am a react app
 				<DatePicker userConfig={config}></DatePicker>
 			</div>
 		)

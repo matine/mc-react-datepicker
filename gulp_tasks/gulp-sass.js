@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
 	sass = require('gulp-sass'),
+	less = require('gulp-less'),
 	autoprefixer = require('gulp-autoprefixer'),
 	combineMq = require('gulp-combine-mq'),
 	browserSync = require('browser-sync'),
@@ -20,7 +21,7 @@ var autoprefixerOptions = {
 };
 
 gulp.task('sass', ['iconfont'], function () {
-	return gulp.src('./src/assets/scss/**/*.scss')
+	return gulp.src('./src/assets/styles/**/*.scss')
 		.pipe(sass(sassOptions).on('error', sass.logError))
 		.pipe(autoprefixer(autoprefixerOptions))
 		.pipe(gulpif(global.env === 'prod', combineMq()))

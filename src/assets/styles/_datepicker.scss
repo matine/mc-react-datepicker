@@ -2,29 +2,52 @@
 //  DATEPICKER
 // =============================================================================
 
+$xsmall: 25em;
+$small: 40em;
+$medium: 50em;
+$large: 64em;
+
+$grayText: #484848;
+$grayKeyline: #e4e7e7;
+$grayBackgroundLight: #f1f1f1;
+$grayBackground: #bdbdbd;
+$teal: #00a699;
+$tealLight: #66e2da;
+$tealLighter: #99ede6;
+
 $spacing: 25px;
 $monthWidth: 273px;
 $monthWidthAndSpacing: $monthWidth + $spacing;
 $twoMonthWidth: ($monthWidth * 2) + $spacing;
 $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
 
 .mc-date-picker {
+	line-height: 1.5;
 	font-size: 16px;
-	font-family: Arial;
 	box-sizing: border-box;
 
 	.datepicker-inputs {
 		@include clearfix;
 
 		input.date-picker-trigger {
+			box-sizing: border-box;
 			cursor: text;
 			width: 150px;
 			float: left;
 			font-size: 14px;
-			color: #484848;
+			color: $grayText;
 			border: 1px solid #ccc;
-			@include padding(20px 15px);
+			padding: 20px 15px;
+			height: 45px;
+			margin-bottom: 10px;
 
 			+ input.date-picker-trigger {
 				border-left: none;
@@ -48,21 +71,22 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 		}
 
 		.calendar {
+			box-sizing: border-box;
 			float: left;
 			width: 299px;
-			@include padding(13px);
-			color: #244152;
+			padding: 13px;
+			color: $grayText;
 			overflow: hidden;
-			@include media($xsmall) {
+			@media screen and (min-width: $xsmall) {
 				width: 323px;
-				@include padding($spacing);
+				padding: $spacing;
 			}
-			@include media($small) {
+			@media screen and (min-width: $small) {
 				width: 621px;
 			}
 
 			+ .calendar {
-				@include padding(null null null 0);
+				padding-left: 0;
 				width: 298px;
 			}
 			&.calendar-show {
@@ -82,7 +106,7 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 
 			.month-header {
 				position: relative;
-				color: #3c3f40;
+				color: $grayText;
 				float: left;
 				width: 100%;
 				display: -webkit-flex;
@@ -92,20 +116,22 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 				align-items: center;
 
 				> i {
-					@include position(absolute, 0 null null 0);
-					@include padding(5px 8px);
+					position: absolute;
+					top: 0;
+					left: 0;
+					padding: 5px 8px;
 					cursor: pointer;
 					font-weight: bold;
 					font-style: normal;
 					font-size: 0.7em;
 
 					+ i {
-						@include position(absolute, 0 0 null auto);
+						right: 0;
+						left: auto;
 					}
 
 					&:hover {
-						background-color: $tealLight;
-						color: white;
+						color: black;
 					}
 				}
 				.month-title {
@@ -116,7 +142,7 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 					+ .month-title {
 						margin-left: $spacing;
 						display: none;
-						@include media($small) {
+						@media screen and (min-width: $small) {
 							display: block;
 						}
 					}
@@ -129,13 +155,13 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 			width: $monthWidth;
 			margin-top: 8px;
 			display: table;
-			@include padding(null null 3px null);
-			@include margin(null null 3px null)
+			padding-bottom: 3px;
+			margin-bottom: 3px;
 
 			+ .week-header {
 				margin-left: $spacing;
 				display: none;
-				@include media($small) {
+				@media screen and (min-width: $small) {
 					display: block;
 				}
 			}
@@ -144,7 +170,7 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 				float: left;
 				width: 39px;
 				font-size: 12px;
-				color: #757575;
+				color: $grayText;
 				text-align: center;
 			}
 		}
@@ -202,7 +228,7 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 
 				&:first-child {
 					.day {
-						border-top: 1px solid #e4e7e7;
+						border-top: 1px solid $grayKeyline;
 						&.other-month {
 							border-top: none;
 						}
@@ -215,33 +241,33 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 				}
 
 				.day {
+					box-sizing: border-box;
 					float: left;
 					width: 39px;
 					height: 38px;
 					font-size: 14px;
 					font-weight: bold;
 					color: #565a5c;
-					@include padding(8px 0);
+					padding: 8px 0;
 					cursor: pointer;
 					text-align: center;
-					border-right: 1px solid #e4e7e7;
-					border-bottom: 1px solid #e4e7e7;
-
-					&.other-month {
-						border-right: none;
+					border-right: 1px solid $grayKeyline;
+					border-bottom: 1px solid $grayKeyline;
+					&:hover {
+						background: $grayBackgroundLight;
 					}
 
 					&:first-child {
-						border-left: 1px solid #e4e7e7;
+						border-left: 1px solid $grayKeyline;
+					}
+					&.other-month {
+						border-right: none;
 					}
 					&.other-month {
 						border-left: none;
 						&.last-day {
-							border-right: 1px solid #e4e7e7;
+							border-right: 1px solid $grayKeyline;
 						}
-					}
-					&:hover {
-						background: $tealLight;
 					}
 					&.disabled {
 						color: #E0E0E0;
@@ -249,9 +275,6 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 						&:hover {
 							background: transparent !important;
 						}
-					}
-					&.today {
-						background: #f2f2f2;
 					}
 					&.inbetween {
 						background-color: $tealLight;

@@ -10,6 +10,10 @@ let Helpers =  {
 		return true;
 	},
 
+	UseIfExists : function(objToCheck, defaultObj) {
+		return outcome = objToCheck ? objToCheck : defaultObj;
+	},
+
 	getMonthString : function(dateObj) {
 		var monthStrings = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 		var monthIndex = dateObj.getMonth();

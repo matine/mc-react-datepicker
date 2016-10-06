@@ -14,7 +14,7 @@ var DatePicker = React.createClass({
 	getInitialState: function() {
 		var def = this.props.selected || new Date();
 		var view = DateUtilities.clone(def);
-		var defaultConfig = this.defaultConfigObj();
+		var config = this.configObj();
 
 		return {
 			view: view,
@@ -23,7 +23,7 @@ var DatePicker = React.createClass({
 			startDateInputActive: false,
 			endDateInputActive: false,
 			visible: false,
-			defaultConfig: defaultConfig
+			config: config
 		};
 	},
 
@@ -34,31 +34,33 @@ var DatePicker = React.createClass({
 		}.bind(this));
 	},
 
-	defaultConfigObj: function() {
+	configObj: function() {
+		// Shorten names for user config to use in the object
+		var userConfig = this.props.userConfig;
+		var userTheme = this.props.userConfig.theme;
+
 		// Set up colors for default theme
 		var textGray = "#565a5c",
 			teal = "#66e2da",
 			lightTeal = "#99ede6",
 			darkTeal = "#00a699";
 
-		// Return full default config object
+		// Return config object with user config settings/themes if they exist, otherwise use default
 		return {
 			theme : {
 				inputs : {
-					activeBackgroundColor: lightTeal,
-					activeColor: textGray
+					activeBackgroundColor: userTheme.inputs.activeBackgroundColor ? userTheme.inputs.activeBackgroundColor : lightTeal,
+					activeColor: userTheme.inputs.activeColor ? userTheme.inputs.activeColor : textGray
 				},
 				days : {
 					dayBackgroundColor: "white",
-					dayColor: textGray,
+					dayColor: userTheme.days.dayColor ? userTheme.days.dayColor : textGray,
 					hoverBackgroundColor: teal,
 					hoverColor: textGray,
-					selectedBackgroundColor: darkTeal,
+					selectedBackgroundColor: userTheme.days.selectedBackgroundColor ? userTheme.days.selectedBackgroundColor : darkTeal,
 					selectedColor: "white",
-					todayBackgroundColor: "#f2f2f2",
-					todayColor: textGray,
-					inBetweenBackgroundColor: lightTeal,
-					inBetweenColor: textGray
+					inbetweenBackgroundColor: userTheme.days.inbetweenBackgroundColor ? userTheme.days.inbetweenBackgroundColor : lightTeal,
+					inbetweenColor: userTheme.days.inbetweenColor ? userTheme.days.inbetweenColor : textGray
 				}
 			}
 		}
@@ -66,6 +68,9 @@ var DatePicker = React.createClass({
 
 	onSelect: function(day) {
 		var self = this;
+
+		if (!DateUtilities.isSameDay(day, new Date()) && day < new Date())
+			return;
 
 		if (this.state.startDateInputActive) {
 			this.setState({ selectedStart: day });
@@ -135,20 +140,13 @@ var DatePicker = React.createClass({
 			selectedStart: this.state.selectedStart,
 			selectedEnd: this.state.selectedEnd
 		}
-		// Creat config objects to pass through Calendar component
-		var configs = {
-			defaultTheme: this.state.defaultConfig.theme,
-			userTheme: this.props.userConfig.theme
-		}
+		// Get input theme from config
+		var configInputs = this.state.config.theme.inputs
 
-		// Get default and user configuration for the input fields
-		var defaultThemeInputs = this.state.defaultConfig.theme.inputs;
-		var userThemeInputs = this.props.userConfig.theme.inputs;
-
-		// Create style objects for input fields, using default config if user has not provided any
+		// Create style objects for input fields using config
 		var inputActiveStyle = {
-			color: userThemeInputs.activeColor ? userThemeInputs.activeColor : defaultThemeInputs.activeColor,
-			backgroundColor: userThemeInputs.activeBackgroundColor ? userThemeInputs.activeBackgroundColor : defaultThemeInputs.activeBackgroundColor
+			color: configInputs.activeColor,
+			backgroundColor: configInputs.activeBackgroundColor
 		};
 		var inputInactiveStyle = {
 			backgroundColor: "white"
@@ -167,7 +165,7 @@ var DatePicker = React.createClass({
 					<input ref="endInput" type="text" className={"date-picker-trigger"} style={this.state.endDateInputActive ? inputActiveStyle : inputInactiveStyle} readOnly="true" value={selectedEndString} onClick={this.show.bind(null, 'end')} />
 				</div>
 				<div className={this.state.visible ? "calendars visible" : "calendars"}>
-					<Calendar calendarObj={calendarObj} configs={configs} onSelect={this.onSelect}></Calendar>
+					<Calendar calendarObj={calendarObj} config={this.state.config} onSelect={this.onSelect}></Calendar>
 				</div>
 			</div>
 		)

@@ -7,6 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Helpers from '../Helpers';
 import DateUtilities from '../DateUtilities';
+import Inputs from './Inputs';
 import Calendar from './Calendar';
 
 var DatePicker = React.createClass({
@@ -30,7 +31,7 @@ var DatePicker = React.createClass({
 	componentDidMount: function() {
 		document.addEventListener("click", function(e) {
 			if (this.state.visible && e.target.className !== "date-picker-trigger" && !Helpers.parentsHaveClassName(e.target, "mc-date-picker"))
-				this.hide();
+				this.hideCalendar();
 		}.bind(this));
 	},
 
@@ -66,6 +67,7 @@ var DatePicker = React.createClass({
 		}
 	},
 
+	// On select of a day, set start or end date and input highlighting
 	onSelect: function(day) {
 		var self = this;
 
@@ -73,26 +75,26 @@ var DatePicker = React.createClass({
 			return;
 
 		if (this.state.startDateInputActive) {
-			this.setState({ selectedStart: day });
+			this.setInputDate("start", day);
 			this.setInputHighlighting("end");
-			if (day > this.state.selectedEnd) {
-				this.setInputDateToDefault("end");
+			if (day > this.selectedEnd) {
+				this.setInputDate("end");
 			}
 		} else if (this.state.endDateInputActive) {
-			this.setState({ selectedEnd: day });
+			this.setInputDate("end", day);
 			this.setInputHighlighting("none");
-			if (day < this.state.selectedStart) {
-				this.setInputDateToDefault("start");
+			if (day < this.selectedStart) {
+				this.setInputDate("start");
 			}
 		} else {
 			if (day >= this.state.selectedStart) {
-				this.setState({ selectedEnd: day });
+				this.setInputDate("end", day);
 				this.setInputHighlighting("end");
 				setTimeout( function() {
 					self.setInputHighlighting("none");
 				}, 200)
 			} else {
-				this.setState({ selectedStart: day });
+				this.setInputDate("start", day);
 				this.setInputHighlighting("start");
 				setTimeout( function() {
 					self.setInputHighlighting("none");
@@ -101,33 +103,51 @@ var DatePicker = React.createClass({
 		}
 	},
 
-	setInputDateToDefault: function(inputType) {
-		if (inputType === "start") {
-			this.setState({ selectedStart: "Check In" });
+	setInputDate: function(inputType, day) {
+		// If a day has been passed in, set the input to that date obj
+		if (day) {
+			if (inputType === "start")
+				this.setState({ selectedStart: day });
+			if (inputType === "end")
+				this.setState({ selectedEnd: day });
+		// Otherwise set to default strings
 		} else {
-			this.setState({ selectedEnd: "Check Out" });
+			if (inputType === "start")
+				this.setState({ selectedStart: "Check In" });
+			if (inputType === "end")
+				this.setState({ selectedEnd: "Check Out" });
 		}
 	},
 
-	setInputHighlighting: function(inputType) {
-		if (inputType === "start") {
-			this.setState({ startDateInputActive: true });
-			this.setState({ endDateInputActive: false });
-		} else if (inputType === "end") {
-			this.setState({ startDateInputActive: false });
-			this.setState({ endDateInputActive: true });
+	setInputHighlighting: function(startOrEnd) {
+		if (startOrEnd === "start") {
+			this.setDateInputActiveState("start", true);
+			this.setDateInputActiveState("end", false);
+		} else if (startOrEnd === "end") {
+			this.setDateInputActiveState("start", false);
+			this.setDateInputActiveState("end", true);
 		} else {
-			this.setState({ startDateInputActive: false });
-			this.setState({ endDateInputActive: false });
+			this.setDateInputActiveState("both", false);
 		}
 	},
 
-	show: function(inputType) {
+	setDateInputActiveState: function(startOrEnd, bool) {
+		if (startOrEnd === "start") {
+			this.setState({ startDateInputActive: bool });
+		} else if (startOrEnd === "end") {
+			this.setState({ endDateInputActive: bool });
+		} else {
+			this.setState({ startDateInputActive: bool });
+			this.setState({ endDateInputActive: bool });
+		}
+	},
+
+	showCalendar: function(inputType) {
 		this.setState({ visible: true });
 		this.setInputHighlighting(inputType);
 	},
 
-	hide: function() {
+	hideCalendar: function() {
 		this.setState({ visible: false });
 		this.setState({ startDateInputActive: false });
 		this.setState({ endDateInputActive: false });
@@ -135,37 +155,27 @@ var DatePicker = React.createClass({
 
 	render : function() {
 		// Create object to pass through Calendar component
-		var calendarObj = {
+		var statesForCalendar = {
+			config: this.state.config,
 			view: this.state.view,
 			selectedStart: this.state.selectedStart,
 			selectedEnd: this.state.selectedEnd
 		}
+		var statesForInput = {
+			config: this.state.config,
+			selectedStart: this.state.selectedStart,
+			selectedEnd: this.state.selectedEnd,
+			startDateInputActive: this.state.startDateInputActive,
+			endDateInputActive: this.state.endDateInputActive
+		}
 		// Get input theme from config
 		var configInputs = this.state.config.theme.inputs
 
-		// Create style objects for input fields using config
-		var inputActiveStyle = {
-			color: configInputs.activeColor,
-			backgroundColor: configInputs.activeBackgroundColor
-		};
-		var inputInactiveStyle = {
-			backgroundColor: "white"
-		};
-
-		// Create strings to use as value for inputs, by using default string or turning date obj into string if exists
-		var selectedStartString = calendarObj.selectedStart;
-		var selectedEndString = calendarObj.selectedEnd;
-		if (DateUtilities.isDateObj(calendarObj.selectedStart)) selectedStartString = DateUtilities.toString(this.state.selectedStart)
-		if (DateUtilities.isDateObj(calendarObj.selectedEnd)) selectedEndString = DateUtilities.toString(this.state.selectedEnd)
-
 		return (
 			<div className="mc-date-picker">
-				<div className="datepicker-inputs">
-					<input type="text" className="date-picker-trigger" style={this.state.startDateInputActive ? inputActiveStyle : inputInactiveStyle} readOnly="true" value={selectedStartString} onClick={this.show.bind(null, 'start')} />
-					<input ref="endInput" type="text" className={"date-picker-trigger"} style={this.state.endDateInputActive ? inputActiveStyle : inputInactiveStyle} readOnly="true" value={selectedEndString} onClick={this.show.bind(null, 'end')} />
-				</div>
+				<Inputs datePickerStates={statesForInput} showCalendar={this.showCalendar}></Inputs>
 				<div className={this.state.visible ? "calendars visible" : "calendars"}>
-					<Calendar calendarObj={calendarObj} config={this.state.config} onSelect={this.onSelect}></Calendar>
+					<Calendar datePickerStates={statesForCalendar} onSelect={this.onSelect}></Calendar>
 				</div>
 			</div>
 		)

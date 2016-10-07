@@ -28,10 +28,10 @@ var Week = React.createClass({
 	},
 
 	getDayClassAndStyle: function(day) {
-		var selectedStart = this.props.calendarObj.selectedStart;
-		var selectedEnd = this.props.calendarObj.selectedEnd;
+		var selectedStart = this.props.datePickerStates.selectedStart;
+		var selectedEnd = this.props.datePickerStates.selectedEnd;
 
-		var configThemeDays = this.props.config.theme.days;
+		var configThemeDays = this.props.datePickerStates.config.theme.days;
 
 		var styles = {
 			color: null,
@@ -108,8 +108,7 @@ var Week = React.createClass({
 	propTypes : {
 		start : React.PropTypes.object.isRequired,
 		month: React.PropTypes.number.isRequired,
-		calendarObj : React.PropTypes.object.isRequired,
-		config : React.PropTypes.object.isRequired,
+		datePickerStates : React.PropTypes.object.isRequired,
 		onSelect : React.PropTypes.func.isRequired
 	}
 });

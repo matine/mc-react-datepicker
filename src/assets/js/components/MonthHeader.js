@@ -49,8 +49,8 @@ var MonthHeader = React.createClass({
 
 		return (
 			<div className="month-header">
-				<i className={enabled ? "" : " disabled"} onClick={this.moveBackward}>{String.fromCharCode(9664)}</i>
-				<i className={enabled ? "" : " disabled"} onClick={this.moveForward}>{String.fromCharCode(9654)}</i>
+				<i className={enabled ? "" : " disabled"} onClick={this.moveBackward}></i>
+				<i className={enabled ? "" : " disabled"} onClick={this.moveForward}></i>
 				<span className="month-title">{DateUtilities.toMonthAndYearString(this.state.view)}</span>
 				<span className="month-title">{DateUtilities.toMonthAndYearString(DateUtilities.getNextMonth(this.state.view))}</span>
 			</div>

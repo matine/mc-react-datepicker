@@ -66,35 +66,50 @@ var DatePicker = React.createClass({
 		}
 	},
 
+	selectStartDate: function(day) {
+		var self = this;
+		var endDateIsSelected = DateUtilities.isDateObj(this.state.selectedEnd);
+		this.setInputDate("start", day);
+		this.setInputHighlighting("start");
+		setTimeout( function() {
+			endDateIsSelected ? self.setInputHighlighting("none") : self.setInputHighlighting("end");
+		}, 200)
+	},
+
+	selectEndDate: function(day) {
+		var self = this;
+		var startDateIsSelected = DateUtilities.isDateObj(this.state.selectedStart);
+		this.setInputDate("end", day);
+		this.setInputHighlighting("end");
+		setTimeout( function() {
+			startDateIsSelected ? self.setInputHighlighting("none") : self.setInputHighlighting("start");
+		}, 200)
+	},
+
 	// On select of a day, set start or end date and input highlighting
 	onSelect: function(day) {
-		var self = this;
-
+		// if the start date input is highlighted
 		if (this.state.startDateInputActive) {
-			this.setInputDate("start", day);
-			this.setInputHighlighting("end");
-			if (day > this.selectedEnd) {
-				this.setInputDate("end");
+			// if user is trying to select startdate after enddate, select enddate instead
+			if (day > this.state.selectedEnd) {
+				this.selectEndDate(day);
+			} else {
+				this.selectStartDate(day);
 			}
+		// else if the end date input is highlighted
 		} else if (this.state.endDateInputActive) {
-			this.setInputDate("end", day);
-			this.setInputHighlighting("none");
-			if (day < this.selectedStart) {
-				this.setInputDate("start");
+			// If user is trying to select enddate before startdate, select startdate instead
+			if (day < this.state.selectedStart) {
+				this.selectStartDate(day);
+			} else {
+				this.selectEndDate(day);
 			}
+		// else if no inputs are highlighted
 		} else {
 			if (day >= this.state.selectedStart) {
-				this.setInputDate("end", day);
-				this.setInputHighlighting("end");
-				setTimeout( function() {
-					self.setInputHighlighting("none");
-				}, 200)
+				this.selectEndDate(day);
 			} else {
-				this.setInputDate("start", day);
-				this.setInputHighlighting("start");
-				setTimeout( function() {
-					self.setInputHighlighting("none");
-				}, 200)
+				this.selectStartDate(day);
 			}
 		}
 	},

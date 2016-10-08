@@ -20,8 +20,6 @@ var App = React.createClass({
 		var config = {
 			selectedStartDefaultString : "Start date",
 			selectedEndDefaultString : "End date",
-			preselectedStartDate : new Date("December 20, 2016"),
-			preselectedEndDate : new Date("February 26, 2017"),
 			disabledDays : [
 				{
 					firstDay : d.setDate(17),

@@ -1,44 +1,66 @@
 # Date Picker
 
-## Configuration
+Once the datepicker is in the node_modules folder, you can import it on your page and render it with an optional userConfig object passed in, as explained below.
 
-The datepicker accepts an optional user configuration object with the following properties.
+**Import the datepicker:**
+```javascript
+import McReactDatepicker from 'mc-react-datepicker';
+```
+
+**Render the datepicker:**
+```javascript
+<DatePicker></DatePicker>
+```
+
+OR
+
+**Render the datepicker with a userConfig object:**
+```javascript
+<DatePicker userConfig={userConfig}></DatePicker>
+```
+
+## User configuration object
+
+The datepicker accepts an optional user configuration object with the following properties explained.
 
 ### selectedStartDefaultString
 
-Type: String
+**Type:** String
 
-Default: "Start date"
+**Default:** "Start date"
 
+**Description:**
 The text that appears in the input field for the start date, when a date has not yet been selected
 
-Example:
+**Example:**
 ```javascript
 selectedStartDefaultString : "Check In",
 ```
 
 ### selectedEndDefaultString
 
-Type: String
+**Type:** String
 
-Default: "End date"
+**Default:** "End date"
 
+**Description:**
 The text that appears in the input field for the end date, when a date has not yet been selected
 
-Example:
+**Example:**
 ```javascript
 selectedEndDefaultString : "Check Out",
 ```
 
 ### disabledDays
 
-Type: Array
+**Type:** Array
 
-Default: null
+**Default:** null
 
-Each item in the array should be an object with two properties 'firstDay' and 'lastDay' with date objects as the values
+**Description:**
+Disabled date ranges. Each item in the array should be an object with two properties 'firstDay' and 'lastDay' with date objects as the values.
 
-Example:
+**Example:**
 ```javascript
 disabledDays : [
     {
@@ -54,4 +76,26 @@ disabledDays : [
 
 ### theme
 
-Type: Object
+**Type:** Object
+
+**Default:** Teal theme ("#565a5c", "#66e2da", "#99ede6", "#00a699")
+
+**Description:**
+Colour theming for the input field active states, the selected days and inbetween days.
+The two nested objects are 'inputs' and 'days' which contain properties that accept a string colour value.
+
+**Example:**
+```javascript
+theme : {
+    inputs : {
+        activeBackgroundColor: "#ffcccc",
+        activeColor: "#565a5c"
+    },
+    days : {
+        selectedBackgroundColor: "#ff4d4d",
+        inbetweenBackgroundColor: "#ffcccc",
+    }
+}
+```
+
+

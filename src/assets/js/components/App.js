@@ -10,6 +10,7 @@ import DatePicker from './DatePicker';
 var App = React.createClass({
 
 	render : function() {
+		var d = new Date();
 
 		var textGray = "#565a5c",
 			coral = "#ff9999",
@@ -17,20 +18,28 @@ var App = React.createClass({
 			darkCoral = "#ff4d4d";
 
 		var config = {
+			selectedStartDefaultString : "Start date",
+			selectedEndDefaultString : "End date",
+			preselectedStartDate : new Date("December 20, 2016"),
+			preselectedEndDate : new Date("February 26, 2017"),
+			disabledDays : [
+				{
+					firstDay : d.setDate(17),
+					lastDay : d.setDate(19)
+				},
+				{
+					firstDay : d.setMonth(11),
+					lastDay : d.setMonth(11)
+				}
+			],
 			theme : {
 				inputs : {
 					activeBackgroundColor: lightCoral,
 					activeColor: textGray
 				},
 				days : {
-					dayBackgroundColor: "white",
-					dayColor: textGray,
-					hoverBackgroundColor: coral,
-					hoverColor: textGray,
 					selectedBackgroundColor: darkCoral,
-					selectedColor: "white",
 					inbetweenBackgroundColor: lightCoral,
-					inbetweenColor: textGray
 				}
 			}
 		}

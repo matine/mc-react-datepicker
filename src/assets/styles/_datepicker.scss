@@ -269,16 +269,20 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 							border-right: 1px solid $grayKeyline;
 						}
 					}
-					&.disabled {
-						color: #E0E0E0;
-						cursor: default;
-						&:hover {
-							background: transparent !important;
-						}
-					}
 					&.inbetween {
 						background-color: $tealLight;
 						color: white;
+					}
+					&.disabled,
+					&.past {
+						color: #E0E0E0;
+						cursor: default;
+
+						&:not(.inbetween) {
+							&:hover {
+								background: transparent !important;
+							}
+						}
 					}
 					&.selected-start,
 					&.selected-end {

@@ -13,14 +13,14 @@ import Calendar from './Calendar';
 var DatePicker = React.createClass({
 
 	getInitialState: function() {
-		var def = this.props.selected || new Date();
-		var view = DateUtilities.clone(def);
 		var config = this.configObj();
+		var viewDate = config.preselectedStartDate || config.preselectedEndDate || new Date();
+		var view = DateUtilities.clone(viewDate);
 
 		return {
 			view: view,
-			selectedStart: "Check In",
-			selectedEnd: "Check Out",
+			selectedStart: config.preselectedStartDate || config.selectedStartDefaultString,
+			selectedEnd: config.preselectedEndDate || config.selectedEndDefaultString,
 			startDateInputActive: false,
 			endDateInputActive: false,
 			visible: false,
@@ -48,20 +48,19 @@ var DatePicker = React.createClass({
 
 		// Return config object with user config settings/themes if they exist, otherwise use default
 		return {
+			selectedStartDefaultString : userConfig.selectedStartDefaultString || "Check In",
+			selectedEndDefaultString : userConfig.selectedEndDefaultString || "Check Out",
+			preselectedStartDate : userConfig.preselectedStartDate || null,
+			preselectedEndDate : userConfig.preselectedEndDate || null,
+			disabledDays : userConfig.disabledDays,
 			theme : {
 				inputs : {
-					activeBackgroundColor: userTheme.inputs.activeBackgroundColor ? userTheme.inputs.activeBackgroundColor : lightTeal,
-					activeColor: userTheme.inputs.activeColor ? userTheme.inputs.activeColor : textGray
+					activeBackgroundColor: userTheme.inputs.activeBackgroundColor || lightTeal,
+					activeColor: userTheme.inputs.activeColor || textGray
 				},
 				days : {
-					dayBackgroundColor: "white",
-					dayColor: userTheme.days.dayColor ? userTheme.days.dayColor : textGray,
-					hoverBackgroundColor: teal,
-					hoverColor: textGray,
-					selectedBackgroundColor: userTheme.days.selectedBackgroundColor ? userTheme.days.selectedBackgroundColor : darkTeal,
-					selectedColor: "white",
-					inbetweenBackgroundColor: userTheme.days.inbetweenBackgroundColor ? userTheme.days.inbetweenBackgroundColor : lightTeal,
-					inbetweenColor: userTheme.days.inbetweenColor ? userTheme.days.inbetweenColor : textGray
+					selectedBackgroundColor: userTheme.days.selectedBackgroundColor || darkTeal,
+					inbetweenBackgroundColor: userTheme.days.inbetweenBackgroundColor || lightTeal,
 				}
 			}
 		}
@@ -70,9 +69,6 @@ var DatePicker = React.createClass({
 	// On select of a day, set start or end date and input highlighting
 	onSelect: function(day) {
 		var self = this;
-
-		if (!DateUtilities.isSameDay(day, new Date()) && day < new Date())
-			return;
 
 		if (this.state.startDateInputActive) {
 			this.setInputDate("start", day);

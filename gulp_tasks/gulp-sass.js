@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
 	sass = require('gulp-sass'),
-	less = require('gulp-less'),
 	autoprefixer = require('gulp-autoprefixer'),
 	combineMq = require('gulp-combine-mq'),
 	browserSync = require('browser-sync'),

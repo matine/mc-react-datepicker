@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+### Import and render the datepicker
+
 Once the datepicker is in the node_modules folder, you can import it on your page and render it with an optional userConfig object passed in, as explained below.
 
 **Import the datepicker:**
@@ -21,12 +23,16 @@ OR
 <DatePicker userConfig={userConfig}></DatePicker>
 ```
 
-**Include either the raw SASS styles or compiled CSS:**
+### Include the styles
 
+You can include either the raw SASS styles or compiled CSS, depending on your setup.
+
+**Include the raw SASS:**
 [datepicker.scss](https://github.com/matine/mc-react-datepicker/blob/master/dist/assets/styles/components/datepicker.scss)
 
 OR
 
+**Include the compiled CSS:**
 [datepicker.css](https://github.com/matine/mc-react-datepicker/blob/master/dist/assets/styles/components/datepicker.css)
 
 

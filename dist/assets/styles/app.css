@@ -1,0 +1,216 @@
+body {
+  background-color: #e5e5e5;
+  padding: 10px;
+  font-family: Arial; }
+
+.mc-date-picker {
+  line-height: 1.5;
+  font-size: 16px;
+  box-sizing: border-box; }
+  .mc-date-picker .datepicker-inputs:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .mc-date-picker .datepicker-inputs input.date-picker-trigger {
+    -webkit-appearance: none;
+    border-radius: 0;
+    box-sizing: border-box;
+    cursor: text;
+    width: 50%;
+    max-width: 152px;
+    float: left;
+    font-size: 14px;
+    color: #484848;
+    border: 1px solid #ccc;
+    padding: 20px 15px;
+    height: 45px;
+    margin-bottom: 10px; }
+    .mc-date-picker .datepicker-inputs input.date-picker-trigger + input.date-picker-trigger {
+      border-left: none; }
+    .mc-date-picker .datepicker-inputs input.date-picker-trigger.active {
+      background-color: #99ede6; }
+  .mc-date-picker .calendars {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); }
+    .mc-date-picker .calendars.visible {
+      display: block; }
+    .mc-date-picker .calendars .calendar {
+      box-sizing: border-box;
+      float: left;
+      width: 284px;
+      padding: 16px;
+      color: #484848;
+      overflow: hidden; }
+      @media screen and (min-width: 22em) {
+        .mc-date-picker .calendars .calendar {
+          width: 303px;
+          padding: 25px; } }
+      @media screen and (min-width: 40em) {
+        .mc-date-picker .calendars .calendar {
+          width: 581px; } }
+      .mc-date-picker .calendars .calendar + .calendar {
+        padding-left: 0;
+        width: 298px; }
+      .mc-date-picker .calendars .calendar.calendar-show {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 100ms linear; }
+      .mc-date-picker .calendars .calendar.calendar-hide {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 100ms, opacity 100ms linear; }
+      .mc-date-picker .calendars .calendar .calendar-view + .calendar-view {
+        margin-left: 20px; }
+      .mc-date-picker .calendars .calendar .month-header {
+        position: relative;
+        color: #484848;
+        float: left;
+        width: 100%;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+        -ms-flex-align: center;
+            align-items: center; }
+        .mc-date-picker .calendars .calendar .month-header > i {
+          -webkit-appearance: none;
+          position: absolute;
+          top: 2px;
+          left: 0;
+          padding: 5px 8px;
+          cursor: pointer;
+          font-weight: bold;
+          font-style: normal;
+          font-size: 0.7em; }
+          .mc-date-picker .calendars .calendar .month-header > i:before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 8px solid #484848; }
+          .mc-date-picker .calendars .calendar .month-header > i:hover:before {
+            border-right-color: black; }
+          .mc-date-picker .calendars .calendar .month-header > i + i {
+            right: 0;
+            left: auto; }
+            .mc-date-picker .calendars .calendar .month-header > i + i:before {
+              border-top: 6px solid transparent;
+              border-bottom: 6px solid transparent;
+              border-right: none;
+              border-left: 8px solid #484848; }
+            .mc-date-picker .calendars .calendar .month-header > i + i:hover:before {
+              border-left-color: black; }
+        .mc-date-picker .calendars .calendar .month-header .month-title {
+          width: 253px;
+          text-align: center;
+          font-size: 18px;
+          font-weight: bold; }
+          .mc-date-picker .calendars .calendar .month-header .month-title + .month-title {
+            margin-left: 25px;
+            display: none; }
+            @media screen and (min-width: 40em) {
+              .mc-date-picker .calendars .calendar .month-header .month-title + .month-title {
+                display: block; } }
+    .mc-date-picker .calendars .week-header {
+      float: left;
+      width: 253px;
+      margin-top: 8px;
+      display: table;
+      padding-bottom: 3px;
+      margin-bottom: 3px; }
+      .mc-date-picker .calendars .week-header + .week-header {
+        margin-left: 25px;
+        display: none; }
+        @media screen and (min-width: 40em) {
+          .mc-date-picker .calendars .week-header + .week-header {
+            display: block; } }
+      .mc-date-picker .calendars .week-header > span {
+        float: left;
+        width: 36px;
+        font-size: 12px;
+        color: #484848;
+        text-align: center; }
+    .mc-date-picker .calendars .weeks {
+      float: left;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 210px; }
+      .mc-date-picker .calendars .weeks > div {
+        position: absolute; }
+        .mc-date-picker .calendars .weeks > div.current {
+          left: 0;
+          width: 531px; }
+        .mc-date-picker .calendars .weeks > div.prev, .mc-date-picker .calendars .weeks > div.next {
+          width: 253px; }
+        .mc-date-picker .calendars .weeks > div.prev {
+          left: -278px; }
+        .mc-date-picker .calendars .weeks > div.next {
+          left: 556px; }
+        .mc-date-picker .calendars .weeks > div.sliding {
+          transition: transform 500ms ease;
+          -webkit-transition: -webkit-transform 500ms ease; }
+          .mc-date-picker .calendars .weeks > div.sliding.left {
+            transform: translate3d(-278px, 0, 0);
+            -webkit-transform: translate3d(-278px, 0, 0); }
+          .mc-date-picker .calendars .weeks > div.sliding.right {
+            transform: translate3d(278px, 0, 0);
+            -webkit-transform: translate3d(278px, 0, 0); }
+        .mc-date-picker .calendars .weeks > div .weeks-one,
+        .mc-date-picker .calendars .weeks > div .weeks-two {
+          float: left;
+          width: 253px; }
+        .mc-date-picker .calendars .weeks > div .weeks-two {
+          margin-left: 25px; }
+      .mc-date-picker .calendars .weeks .week {
+        float: left;
+        width: 100%; }
+        .mc-date-picker .calendars .weeks .week:first-child .day {
+          border-top: 1px solid #e4e7e7; }
+          .mc-date-picker .calendars .weeks .week:first-child .day.other-month {
+            border-top: none; }
+        .mc-date-picker .calendars .weeks .week:last-child .day.other-month {
+          border-bottom: none; }
+        .mc-date-picker .calendars .weeks .week .day {
+          box-sizing: border-box;
+          float: left;
+          width: 36px;
+          height: 35px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #565a5c;
+          padding: 8px 0;
+          cursor: pointer;
+          text-align: center;
+          border-right: 1px solid #e4e7e7;
+          border-bottom: 1px solid #e4e7e7; }
+          .mc-date-picker .calendars .weeks .week .day:hover {
+            background: #f1f1f1; }
+          .mc-date-picker .calendars .weeks .week .day:first-child {
+            border-left: 1px solid #e4e7e7; }
+          .mc-date-picker .calendars .weeks .week .day.other-month {
+            border-right: none; }
+          .mc-date-picker .calendars .weeks .week .day.other-month {
+            border-left: none; }
+            .mc-date-picker .calendars .weeks .week .day.other-month.last-day {
+              border-right: 1px solid #e4e7e7; }
+          .mc-date-picker .calendars .weeks .week .day.inbetween {
+            background-color: #66e2da;
+            color: white; }
+          .mc-date-picker .calendars .weeks .week .day.disabled, .mc-date-picker .calendars .weeks .week .day.past {
+            color: #E0E0E0;
+            cursor: default; }
+            .mc-date-picker .calendars .weeks .week .day.disabled:not(.inbetween):hover, .mc-date-picker .calendars .weeks .week .day.past:not(.inbetween):hover {
+              background: transparent !important; }
+          .mc-date-picker .calendars .weeks .week .day.selected-start, .mc-date-picker .calendars .weeks .week .day.selected-end {
+            background: #00a699;
+            color: white; }
+          .mc-date-picker .calendars .weeks .week .day.other-month {
+            cursor: default;
+            color: white;
+            background-color: white; }

@@ -1,0 +1,322 @@
+// =============================================================================
+//  DATEPICKER
+// =============================================================================
+
+$xsmall: 22em;
+$small: 40em;
+$medium: 50em;
+$large: 64em;
+
+$grayText: #484848;
+$grayKeyline: #e4e7e7;
+$grayBackgroundLight: #f1f1f1;
+$grayBackground: #bdbdbd;
+$teal: #00a699;
+$tealLight: #66e2da;
+$tealLighter: #99ede6;
+
+$spacing: 25px;
+$monthWidth: 253px;
+$monthWidthAndSpacing: $monthWidth + $spacing;
+$twoMonthWidth: ($monthWidth * 2) + $spacing;
+$twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
+
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+.mc-date-picker {
+	line-height: 1.5;
+	font-size: 16px;
+	box-sizing: border-box;
+
+	.datepicker-inputs {
+		@include clearfix;
+
+		input.date-picker-trigger {
+			-webkit-appearance: none;
+			border-radius: 0;
+			box-sizing: border-box;
+			cursor: text;
+			width: 50%;
+			max-width: 152px;
+			float: left;
+			font-size: 14px;
+			color: $grayText;
+			border: 1px solid #ccc;
+			padding: 20px 15px;
+			height: 45px;
+			margin-bottom: 10px;
+
+			+ input.date-picker-trigger {
+				border-left: none;
+			}
+
+			&.active {
+				background-color: $tealLighter;
+			}
+		}
+	}
+
+	.calendars {
+		display: none;
+		position: absolute;
+		z-index: 10;
+		background: white;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+
+		&.visible {
+			display: block;
+		}
+
+		.calendar {
+			box-sizing: border-box;
+			float: left;
+			width: 284px;
+			padding: 16px;
+			color: $grayText;
+			overflow: hidden;
+			@media screen and (min-width: $xsmall) {
+				width: 303px;
+				padding: $spacing;
+			}
+			@media screen and (min-width: $small) {
+				width: 581px;
+			}
+
+			+ .calendar {
+				padding-left: 0;
+				width: 298px;
+			}
+			&.calendar-show {
+				visibility: visible;
+				opacity: 1;
+				transition: opacity 100ms linear;
+			}
+			&.calendar-hide {
+				visibility: hidden;
+				opacity: 0;
+				transition: visibility 0s 100ms, opacity 100ms linear;
+			}
+
+			.calendar-view + .calendar-view {
+				margin-left: 20px;
+			}
+
+			.month-header {
+				position: relative;
+				color: $grayText;
+				float: left;
+				width: 100%;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-justify-content: space-between;
+				justify-content: space-between;
+				align-items: center;
+
+				> i {
+					-webkit-appearance: none;
+					position: absolute;
+					top: 2px;
+					left: 0;
+					padding: 5px 8px;
+					cursor: pointer;
+					font-weight: bold;
+					font-style: normal;
+					font-size: 0.7em;
+					&:before {
+						content: '';
+						display: block;
+						width: 0;
+						height: 0;
+						border-top: 6px solid transparent;
+						border-bottom: 6px solid transparent;
+						border-right: 8px solid $grayText;
+					}
+					&:hover:before {
+						border-right-color: black;
+					}
+
+					+ i {
+						right: 0;
+						left: auto;
+						&:before {
+							border-top: 6px solid transparent;
+							border-bottom: 6px solid transparent;
+							border-right: none;
+							border-left: 8px solid $grayText;
+						}
+						&:hover:before {
+							border-left-color: black;
+						}
+					}
+				}
+				.month-title {
+					width: $monthWidth;
+					text-align: center;
+					font-size: 18px;
+					font-weight: bold;
+					+ .month-title {
+						margin-left: $spacing;
+						display: none;
+						@media screen and (min-width: $small) {
+							display: block;
+						}
+					}
+				}
+			}
+		}
+
+		.week-header {
+			float: left;
+			width: $monthWidth;
+			margin-top: 8px;
+			display: table;
+			padding-bottom: 3px;
+			margin-bottom: 3px;
+
+			+ .week-header {
+				margin-left: $spacing;
+				display: none;
+				@media screen and (min-width: $small) {
+					display: block;
+				}
+			}
+
+			> span {
+				float: left;
+				width: 36px;
+				font-size: 12px;
+				color: $grayText;
+				text-align: center;
+			}
+		}
+
+		.weeks {
+			float: left;
+			width: 100%;
+			overflow: hidden;
+			position: relative;
+			height: 210px;
+
+			> div {
+				position: absolute;
+
+				&.current {
+					left: 0;
+					width: $twoMonthWidth;
+				}
+				&.prev,
+				&.next {
+					width: $monthWidth;
+				}
+				&.prev {
+					left: -$monthWidthAndSpacing;
+				}
+				&.next {
+					left: $twoMonthWidthAndSpacing;
+				}
+				&.sliding {
+					transition: transform 500ms ease;
+					-webkit-transition: -webkit-transform 500ms ease;
+					&.left {
+						transform: translate3d(-$monthWidthAndSpacing, 0, 0);
+						-webkit-transform: translate3d(-$monthWidthAndSpacing, 0, 0);
+					}
+					&.right {
+						transform: translate3d($monthWidthAndSpacing, 0, 0);
+						-webkit-transform: translate3d($monthWidthAndSpacing, 0, 0);
+					}
+				}
+
+				.weeks-one,
+				.weeks-two {
+					float: left;
+					width: $monthWidth;
+				}
+				.weeks-two {
+					margin-left: $spacing;
+				}
+			}
+
+			.week {
+				float: left;
+				width: 100%;
+
+				&:first-child {
+					.day {
+						border-top: 1px solid $grayKeyline;
+						&.other-month {
+							border-top: none;
+						}
+					}
+				}
+				&:last-child {
+					.day.other-month {
+						border-bottom: none;
+					}
+				}
+
+				.day {
+					box-sizing: border-box;
+					float: left;
+					width: 36px;
+					height: 35px;
+					font-size: 14px;
+					font-weight: bold;
+					color: #565a5c;
+					padding: 8px 0;
+					cursor: pointer;
+					text-align: center;
+					border-right: 1px solid $grayKeyline;
+					border-bottom: 1px solid $grayKeyline;
+					&:hover {
+						background: $grayBackgroundLight;
+					}
+
+					&:first-child {
+						border-left: 1px solid $grayKeyline;
+					}
+					&.other-month {
+						border-right: none;
+					}
+					&.other-month {
+						border-left: none;
+						&.last-day {
+							border-right: 1px solid $grayKeyline;
+						}
+					}
+					&.inbetween {
+						background-color: $tealLight;
+						color: white;
+					}
+					&.disabled,
+					&.past {
+						color: #E0E0E0;
+						cursor: default;
+
+						&:not(.inbetween) {
+							&:hover {
+								background: transparent !important;
+							}
+						}
+					}
+					&.selected-start,
+					&.selected-end {
+						background: $teal;
+						color: white;
+					}
+					&.other-month {
+						cursor: default;
+						color: white;
+						background-color: white;
+					}
+				}
+			}
+		}
+	}
+}

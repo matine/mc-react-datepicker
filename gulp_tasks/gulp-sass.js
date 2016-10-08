@@ -19,12 +19,12 @@ var autoprefixerOptions = {
 	browsers: ['last 2 versions', 'ie 9']
 };
 
-gulp.task('sass', ['iconfont'], function () {
-	return gulp.src('./src/assets/styles/**/*.scss')
+gulp.task('sass', function () {
+	return gulp.src('./src/assets/scss/**/*.scss')
 		.pipe(sass(sassOptions).on('error', sass.logError))
 		.pipe(autoprefixer(autoprefixerOptions))
 		.pipe(gulpif(global.env === 'prod', combineMq()))
 		.pipe(gulpif(global.env === 'prod', minifyCss()))
-		.pipe(gulp.dest('./dist/assets/css/'));
+		.pipe(gulp.dest('./dist/assets/styles/'));
 		// .pipe(gulpif(global.waitingWatch === false, browserSync.stream()));
 });

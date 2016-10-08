@@ -7,6 +7,11 @@ gulp.task('copyMain', function () {
 			'./src/index.html'
 		])
 	.pipe(gulp.dest('./dist/'));
+
+	gulp.src([
+			'./src/assets/scss/components/*.scss'
+		])
+	.pipe(gulp.dest('./dist/assets/styles/components/'));
 });
 
 gulp.task('copyAll', ['copyMain']);

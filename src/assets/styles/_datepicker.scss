@@ -2,7 +2,7 @@
 //  DATEPICKER
 // =============================================================================
 
-$xsmall: 25em;
+$xsmall: 22em;
 $small: 40em;
 $medium: 50em;
 $large: 64em;
@@ -16,7 +16,7 @@ $tealLight: #66e2da;
 $tealLighter: #99ede6;
 
 $spacing: 25px;
-$monthWidth: 273px;
+$monthWidth: 253px;
 $monthWidthAndSpacing: $monthWidth + $spacing;
 $twoMonthWidth: ($monthWidth * 2) + $spacing;
 $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
@@ -43,7 +43,7 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 			box-sizing: border-box;
 			cursor: text;
 			width: 50%;
-			max-width: 150px;
+			max-width: 152px;
 			float: left;
 			font-size: 14px;
 			color: $grayText;
@@ -76,16 +76,16 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 		.calendar {
 			box-sizing: border-box;
 			float: left;
-			width: 299px;
-			padding: 13px;
+			width: 284px;
+			padding: 16px;
 			color: $grayText;
 			overflow: hidden;
 			@media screen and (min-width: $xsmall) {
-				width: 323px;
+				width: 303px;
 				padding: $spacing;
 			}
 			@media screen and (min-width: $small) {
-				width: 621px;
+				width: 581px;
 			}
 
 			+ .calendar {
@@ -189,7 +189,7 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 
 			> span {
 				float: left;
-				width: 39px;
+				width: 36px;
 				font-size: 12px;
 				color: $grayText;
 				text-align: center;
@@ -201,7 +201,7 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 			width: 100%;
 			overflow: hidden;
 			position: relative;
-			height: 230px;
+			height: 210px;
 
 			> div {
 				position: absolute;
@@ -264,8 +264,8 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 				.day {
 					box-sizing: border-box;
 					float: left;
-					width: 39px;
-					height: 38px;
+					width: 36px;
+					height: 35px;
 					font-size: 14px;
 					font-weight: bold;
 					color: #565a5c;

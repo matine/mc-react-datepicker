@@ -22,12 +22,12 @@ var App = React.createClass({
 			selectedEndDefaultString : "End date",
 			disabledDays : [
 				{
-					firstDay : d.setDate(17),
-					lastDay : d.setDate(19)
+					firstDay : new Date("October 16, 2016"),
+					lastDay : new Date("October 19, 2016")
 				},
 				{
-					firstDay : d.setMonth(11),
-					lastDay : d.setMonth(11)
+					firstDay : new Date("December 4, 2016"),
+					lastDay : new Date("December 4, 2016"),
 				}
 			],
 			theme : {

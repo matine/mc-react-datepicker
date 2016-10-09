@@ -102,12 +102,13 @@ disabledDays : [
 **Default:** (various classes)
 
 **Description:**
-Adding classes to the main elements, datepicker, dateInputsWrapper, dateInput, dateInputStart, dateInputEnd, calendarWrapper, calendar.
+Adding classes to the main elements, using the properties: 'datepicker', 'dateInputsWrapper', 'dateInput', 'dateInputStart', 'dateInputEnd', 'calendarWrapper', 'calendar'.
+You can also add more than one class by adding a gap between in the string.
 
 **Example:**
 ```javascript
 classNames : {
-    datepicker: "my-datepicker",
+    datepicker: "my-datepicker my-datepicker-one",
     dateInputsWrapper: "date-inputs-wrapper",
     dateInput: "date-input",
     dateInputStart: "date-input-start",

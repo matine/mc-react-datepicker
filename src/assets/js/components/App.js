@@ -31,7 +31,7 @@ var App = React.createClass({
 				}
 			],
 			classNames : {
-				datepicker: "my-datepicker",
+				datepicker: "my-datepicker my-datepicker-one",
 				dateInputsWrapper: "date-inputs-wrapper",
 				dateInput: "date-input",
 				dateInputStart: "date-input-start",

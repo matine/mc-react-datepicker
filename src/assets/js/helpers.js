@@ -10,6 +10,11 @@ let Helpers =  {
 		return true;
 	},
 
+	AddClassNameIfExists : function(currentClassName, newClassName) {
+		newClassName ? currentClassName += (" " + newClassName) : currentClassName = currentClassName;
+		return currentClassName;
+	},
+
 	UseIfExists : function(objToCheck, defaultObj) {
 		return outcome = objToCheck ? objToCheck : defaultObj;
 	},

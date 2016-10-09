@@ -30,6 +30,15 @@ var App = React.createClass({
 					lastDay : new Date("December 4, 2016"),
 				}
 			],
+			classNames : {
+				datepicker: "my-datepicker",
+				dateInputsWrapper: "date-inputs-wrapper",
+				dateInput: "date-input",
+				dateInputStart: "date-input-start",
+				dateInputEnd: "date-input-end",
+				calendarWrapper: "my-calendar-wrapper",
+				calendar: "my-calendar"
+			},
 			theme : {
 				inputs : {
 					activeBackgroundColor: lightCoral,

@@ -23,6 +23,7 @@ OR
 <DatePicker userConfig={userConfig}></DatePicker>
 ```
 
+
 ### Include the styles
 
 You can include either the raw SASS styles or compiled CSS, depending on your setup.
@@ -54,6 +55,7 @@ The text that appears in the input field for the start date, when a date has not
 selectedStartDefaultString : "Check In",
 ```
 
+
 ### selectedEndDefaultString
 
 **Type:** String
@@ -67,6 +69,7 @@ The text that appears in the input field for the end date, when a date has not y
 ```javascript
 selectedEndDefaultString : "Check Out",
 ```
+
 
 ### disabledDays
 
@@ -91,11 +94,35 @@ disabledDays : [
 ]
 ```
 
+
+### classNames
+
+**Type:** Object
+
+**Default:** (various classes)
+
+**Description:**
+Adding classes to the main elements, datepicker, dateInputsWrapper, dateInput, dateInputStart, dateInputEnd, calendarWrapper, calendar.
+
+**Example:**
+```javascript
+classNames : {
+    datepicker: "my-datepicker",
+    dateInputsWrapper: "date-inputs-wrapper",
+    dateInput: "date-input",
+    dateInputStart: "date-input-start",
+    dateInputEnd: "date-input-end",
+    calendarWrapper: "my-calendar-wrapper",
+    calendar: "my-calendar"
+}
+```
+
+
 ### theme
 
 **Type:** Object
 
-**Default:** Teal theme ("#565a5c", "#66e2da", "#99ede6", "#00a699")
+**Default:** (various colours: "#565a5c", "#66e2da", "#99ede6", "#00a699")
 
 **Description:**
 Colour theming for the input field active states, the selected days and inbetween days.
@@ -114,5 +141,6 @@ theme : {
     }
 }
 ```
+
 
 

@@ -30,10 +30,20 @@ var DatePicker = React.createClass({
 		if (DateUtilities.isDateObj(selectedStart)) selectedStartString = DateUtilities.toString(selectedStart)
 		if (DateUtilities.isDateObj(selectedEnd)) selectedEndString = DateUtilities.toString(selectedEnd)
 
+		// If exists, add user specified classes to the input wrapper and inputs
+		var inputsWrapperClassName = "datepicker-inputs";
+		inputsWrapperClassName = Helpers.AddClassNameIfExists(inputsWrapperClassName, this.props.datePickerStates.config.classNames.dateInputsWrapper);
+		var inputClassName = "date-picker-trigger";
+		inputClassName = Helpers.AddClassNameIfExists(inputClassName, this.props.datePickerStates.config.classNames.dateInput);
+		var inputStartClassName = inputClassName;
+		inputStartClassName = Helpers.AddClassNameIfExists(inputStartClassName, this.props.datePickerStates.config.classNames.dateInputStart);
+		var inputEndClassName = inputClassName;
+		inputEndClassName = Helpers.AddClassNameIfExists(inputEndClassName, this.props.datePickerStates.config.classNames.dateInputEnd);
+
 		return (
-			<div className="datepicker-inputs">
-				<input type="text" className="date-picker-trigger" style={this.props.datePickerStates.startDateInputActive ? inputActiveStyle : inputInactiveStyle} readOnly="true" value={selectedStartString} onClick={this.props.showCalendar.bind(null, 'start')} />
-				<input ref="endInput" type="text" className={"date-picker-trigger"} style={this.props.datePickerStates.endDateInputActive ? inputActiveStyle : inputInactiveStyle} readOnly="true" value={selectedEndString} onClick={this.props.showCalendar.bind(null, 'end')} />
+			<div className={inputsWrapperClassName}>
+				<input type="text" className={inputStartClassName} style={this.props.datePickerStates.startDateInputActive ? inputActiveStyle : inputInactiveStyle} readOnly="true" value={selectedStartString} onClick={this.props.showCalendar.bind(null, 'start')} />
+				<input ref="endInput" type="text" className={inputEndClassName} style={this.props.datePickerStates.endDateInputActive ? inputActiveStyle : inputInactiveStyle} readOnly="true" value={selectedEndString} onClick={this.props.showCalendar.bind(null, 'end')} />
 			</div>
 		)
 	},

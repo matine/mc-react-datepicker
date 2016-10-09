@@ -53,6 +53,15 @@ var DatePicker = React.createClass({
 			preselectedStartDate : userConfig.preselectedStartDate || null,
 			preselectedEndDate : userConfig.preselectedEndDate || null,
 			disabledDays : userConfig.disabledDays,
+			classNames : {
+				datepicker: userConfig.classNames.datepicker || null,
+				dateInputsWrapper: userConfig.classNames.dateInputsWrapper || null,
+				dateInput: userConfig.classNames.dateInput || null,
+				dateInputStart: userConfig.classNames.dateInputStart || null,
+				dateInputEnd: userConfig.classNames.dateInputEnd || null,
+				calendarWrapper: userConfig.classNames.calendarWrapper || null,
+				calendar: userConfig.classNames.calendar || null
+			},
 			theme : {
 				inputs : {
 					activeBackgroundColor: userTheme.inputs.activeBackgroundColor || lightTeal,
@@ -165,7 +174,7 @@ var DatePicker = React.createClass({
 	},
 
 	render : function() {
-		// Create object to pass through Calendar component
+		// Create object to pass through components
 		var statesForCalendar = {
 			config: this.state.config,
 			view: this.state.view,
@@ -179,13 +188,22 @@ var DatePicker = React.createClass({
 			startDateInputActive: this.state.startDateInputActive,
 			endDateInputActive: this.state.endDateInputActive
 		}
+		// If exists, add user specified class to the datepicker
+		var datepickerClassName = "mc-date-picker";
+		datepickerClassName = Helpers.AddClassNameIfExists(datepickerClassName, this.state.config.classNames.datepicker);
+
 		// Get input theme from config
 		var configInputs = this.state.config.theme.inputs
 
+		// Create class for calendar wrapper with visible or not
+		var calendarWrapperClassName = this.state.visible ? "calendar-wrapper visible" : "calendar-wrapper";
+		// If exists, add user specified class to the calendar wrapper
+		calendarWrapperClassName = Helpers.AddClassNameIfExists(calendarWrapperClassName, this.state.config.classNames.calendarWrapper);
+
 		return (
-			<div className="mc-date-picker">
+			<div className={datepickerClassName}>
 				<Inputs datePickerStates={statesForInput} showCalendar={this.showCalendar}></Inputs>
-				<div className={this.state.visible ? "calendars visible" : "calendars"}>
+				<div className={calendarWrapperClassName}>
 					<Calendar datePickerStates={statesForCalendar} onSelect={this.onSelect}></Calendar>
 				</div>
 			</div>

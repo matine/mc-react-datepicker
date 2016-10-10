@@ -46,7 +46,7 @@ var App = React.createClass({
 		}
 
 		return (
-			<DatePicker userConfig={config}></DatePicker>
+			<DatePicker></DatePicker>
 		)
 	}
 });

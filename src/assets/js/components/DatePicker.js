@@ -36,9 +36,12 @@ var DatePicker = React.createClass({
 	},
 
 	configObj: function() {
-		// Shorten names for user config to use in the object
-		var userConfig = this.props.userConfig;
-		var userTheme = this.props.userConfig.theme;
+		// Set all the nested objects inside the config to be empty objects if user has not defined them
+		var userConfig = this.props.userConfig || {};
+		userConfig.classNames = userConfig.classNames || {};
+		userConfig.theme = userConfig.theme || {};
+		userConfig.theme.inputs = userConfig.theme.inputs || {};
+		userConfig.theme.days = userConfig.theme.days || {};
 
 		// Set up colors for default theme
 		var textGray = "#565a5c",
@@ -52,7 +55,7 @@ var DatePicker = React.createClass({
 			selectedEndDefaultString : userConfig.selectedEndDefaultString || "Check Out",
 			preselectedStartDate : userConfig.preselectedStartDate || null,
 			preselectedEndDate : userConfig.preselectedEndDate || null,
-			disabledDays : userConfig.disabledDays,
+			disabledDays : userConfig.disabledDays || [],
 			classNames : {
 				datepicker: userConfig.classNames.datepicker || null,
 				dateInputsWrapper: userConfig.classNames.dateInputsWrapper || null,
@@ -64,12 +67,12 @@ var DatePicker = React.createClass({
 			},
 			theme : {
 				inputs : {
-					activeBackgroundColor: userTheme.inputs.activeBackgroundColor || lightTeal,
-					activeColor: userTheme.inputs.activeColor || textGray
+					activeBackgroundColor: userConfig.theme.inputs.activeBackgroundColor || lightTeal,
+					activeColor: userConfig.theme.inputs.activeColor || textGray
 				},
 				days : {
-					selectedBackgroundColor: userTheme.days.selectedBackgroundColor || darkTeal,
-					inbetweenBackgroundColor: userTheme.days.inbetweenBackgroundColor || lightTeal,
+					selectedBackgroundColor: userConfig.theme.days.selectedBackgroundColor || darkTeal,
+					inbetweenBackgroundColor: userConfig.theme.days.inbetweenBackgroundColor || lightTeal,
 				}
 			}
 		}

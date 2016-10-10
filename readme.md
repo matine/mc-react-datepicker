@@ -15,15 +15,19 @@ Once the datepicker is in the node_modules folder, you can import it on your pag
 import McReactDatepicker from 'mc-react-datepicker';
 ```
 
-**Inport the CSS:**
-```javascript
-require('mc-react-datepicker/dist/assets/styles/components/datepicker.css');
-```
-
 **Render the datepicker with (optional) userConfig object):**
 ```javascript
 <DatePicker userConfig={userConfig}></DatePicker>
 ```
+
+### Include the styles
+
+Both the compiled CSS and raw SASS files are available for you to use depending on which you prefer in your setup.
+
+[datepicker.css]('https://github.com/matine/mc-react-datepicker/raw/master/dist/assets/styles/components/datepicker.css')
+
+[datepicker.scss]('https://github.com/matine/mc-react-datepicker/raw/master/dist/assets/styles/components/datepicker.scss')
+
 
 ## User configuration object
 
@@ -142,7 +146,6 @@ import McReactDatepicker from 'mc-react-datepicker';
 var App = React.createClass({
 
 	render : function() {
-
 		var config = {
 			selectedStartDefaultString : "Start date",
 			selectedEndDefaultString : "End date",
@@ -153,7 +156,7 @@ var App = React.createClass({
 				},
 				{
 					firstDay : new Date("December 4, 2016"),
-					lastDay : new Date("December 4, 2016")
+					lastDay : new Date("December 4, 2016"),
 				}
 			],
 			classNames : {

@@ -20,7 +20,7 @@ var Weeks = React.createClass({
 	},
 
 	componentDidUpdate: function() {
-		ReactDOM.findDOMNode(this.refs.current).addEventListener("transitionend", this.onTransitionEnd);
+		ReactDOM.findDOMNode(this.refs.weeks).addEventListener("transitionend", this.onTransitionEnd);
 	},
 
 	onTransitionEnd: function() {
@@ -29,7 +29,7 @@ var Weeks = React.createClass({
 		if (this.state.sliding === "right") {
 			newCurrentView = DateUtilities.clone(this.state.allViews.viewPrev);
 		} else {
-			newCurrentView = DateUtilities.clone(this.state.allViews.viewCurrent2);
+			newCurrentView = DateUtilities.clone(this.state.allViews.viewNext);
 		}
 		this.setState({
 			sliding: null,
@@ -64,24 +64,17 @@ var Weeks = React.createClass({
 	},
 
 	render: function() {
-		var currentClass = "current";
-		var prevClass = "prev";
-		var nextClass = "next";
+		var weeksClass = "weeks";
 
-		if (this.state.sliding) {
-			currentClass += " sliding " + this.state.sliding;
-			prevClass += " sliding " + this.state.sliding;
-			nextClass += " sliding " + this.state.sliding;
-		}
+		if (this.state.sliding)
+			weeksClass += " sliding " + this.state.sliding;
 
 		return (
-			<div className="weeks">
-				<div className={prevClass}>{this.renderWeeks(this.state.allViews.viewPrev)}</div>
-				<div ref="current" className={currentClass}>
-					<div className="weeks-one">{this.renderWeeks(this.state.allViews.viewCurrent1)}</div>
-					<div className="weeks-two">{this.renderWeeks(this.state.allViews.viewCurrent2)}</div>
-				</div>
-				<div className={nextClass}>{this.renderWeeks(this.state.allViews.viewNext)}</div>
+			<div ref="weeks" className={weeksClass}>
+				<div className="prev">{this.renderWeeks(this.state.allViews.viewPrev)}</div>
+				<div className="current">{this.renderWeeks(this.state.allViews.viewCurrent)}</div>
+				<div className="next">{this.renderWeeks(this.state.allViews.viewNext)}</div>
+				<div className="next2">{this.renderWeeks(this.state.allViews.viewNext2)}</div>
 			</div>
 		)
 	},

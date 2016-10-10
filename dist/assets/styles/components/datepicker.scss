@@ -215,18 +215,21 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 					width: $monthWidth;
 				}
 				&.prev {
-					left: -$monthWidthAndSpacing;
+					left: -248px;
+					// left: -$monthWidthAndSpacing; // -278px
 				}
 				&.next {
-					left: $twoMonthWidthAndSpacing;
+					left: $twoMonthWidthAndSpacing; // 278px
 				}
 				&.sliding {
 					transition: transform 500ms ease;
 					-webkit-transition: -webkit-transform 500ms ease;
+					// Next
 					&.left {
 						transform: translate3d(-$monthWidthAndSpacing, 0, 0);
 						-webkit-transform: translate3d(-$monthWidthAndSpacing, 0, 0);
 					}
+					// Prev
 					&.right {
 						transform: translate3d($monthWidthAndSpacing, 0, 0);
 						-webkit-transform: translate3d($monthWidthAndSpacing, 0, 0);

@@ -6,6 +6,12 @@ A two month view datepicker component (one month view on mobile). View a working
 
 ## Getting Started
 
+### Install the package via npm
+
+```
+npm install react-datepicker --save
+```
+
 ### Import and render the datepicker
 
 Once the datepicker is in the node_modules folder, you can import it on your page and render it with an optional userConfig object passed in, as explained below.

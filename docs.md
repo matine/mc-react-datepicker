@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+[mc-datepicker-screenshot]: https://github.com/matine/mc-react-datepicker/blob/master/screenshot.png
+
 ### Import and render the datepicker
 
 Once the datepicker is in the node_modules folder, you can import it on your page and render it with an optional userConfig object passed in, as explained below.

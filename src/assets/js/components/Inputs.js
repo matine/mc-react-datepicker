@@ -31,9 +31,9 @@ var DatePicker = React.createClass({
 		if (DateUtilities.isDateObj(selectedEnd)) selectedEndString = DateUtilities.toString(selectedEnd)
 
 		// If exists, add user specified classes to the input wrapper and inputs
-		var inputsWrapperClassName = "datepicker-inputs";
+		var inputsWrapperClassName = "mc-datepicker-inputs";
 		inputsWrapperClassName = Helpers.AddClassNameIfExists(inputsWrapperClassName, this.props.datePickerStates.config.classNames.dateInputsWrapper);
-		var inputClassName = "date-picker-trigger";
+		var inputClassName = "mc-date-picker-trigger";
 		inputClassName = Helpers.AddClassNameIfExists(inputClassName, this.props.datePickerStates.config.classNames.dateInput);
 		var inputStartClassName = inputClassName;
 		inputStartClassName = Helpers.AddClassNameIfExists(inputStartClassName, this.props.datePickerStates.config.classNames.dateInputStart);

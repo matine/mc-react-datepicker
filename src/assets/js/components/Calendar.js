@@ -23,7 +23,7 @@ var Calendar = React.createClass({
 
 	render : function() {
 		// If exists, add user specified classes to the calendar
-		var calendarClassName = "calendar";
+		var calendarClassName = "mc-calendar";
 		calendarClassName = Helpers.AddClassNameIfExists(calendarClassName, this.props.datePickerStates.config.classNames.calendar);
 
 		return (

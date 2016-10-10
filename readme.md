@@ -30,9 +30,9 @@ import McReactDatepicker from 'mc-react-datepicker';
 
 Both the compiled CSS and raw SASS files are available for you to use depending on which you prefer in your setup.
 
-[datepicker.css]('https://github.com/matine/mc-react-datepicker/raw/master/dist/assets/styles/components/datepicker.css')
+[datepicker.css](https://github.com/matine/mc-react-datepicker/raw/master/dist/assets/styles/components/datepicker.css)
 
-[datepicker.scss]('https://github.com/matine/mc-react-datepicker/raw/master/dist/assets/styles/components/datepicker.scss')
+[datepicker.scss](https://github.com/matine/mc-react-datepicker/raw/master/dist/assets/styles/components/datepicker.scss)
 
 
 ## User configuration object

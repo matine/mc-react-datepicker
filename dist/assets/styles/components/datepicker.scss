@@ -18,6 +18,7 @@ $tealLighter: #99ede6;
 $spacing: 25px;
 $monthWidth: 253px;
 $monthWidthAndSpacing: $monthWidth + $spacing;
+$monthWidthAnd2Spacing: $monthWidth + $spacing + $spacing;
 $twoMonthWidth: ($monthWidth * 2) + $spacing;
 $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 
@@ -48,7 +49,7 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 			font-size: 14px;
 			color: $grayText;
 			border: 1px solid #ccc;
-			padding: 20px 15px;
+			padding: 10px 15px;
 			height: 45px;
 			margin-bottom: 10px;
 
@@ -67,31 +68,28 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 		position: absolute;
 		z-index: 10;
 		background: white;
+		padding: 16px;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-
+		width: 253px;
+		height: 300px;
+		@media screen and (min-width: $xsmall) {
+			padding: $spacing;
+		}
+		@media screen and (min-width: $small) {
+			width: 531px;
+		}
 		&.visible {
 			display: block;
 		}
 
 		.calendar {
+			width: 100%;
+			height: 100%;
+			position: relative;
 			box-sizing: border-box;
-			float: left;
-			width: 284px;
-			padding: 16px;
 			color: $grayText;
 			overflow: hidden;
-			@media screen and (min-width: $xsmall) {
-				width: 303px;
-				padding: $spacing;
-			}
-			@media screen and (min-width: $small) {
-				width: 581px;
-			}
 
-			+ .calendar {
-				padding-left: 0;
-				width: 298px;
-			}
 			&.calendar-show {
 				visibility: visible;
 				opacity: 1;
@@ -197,52 +195,31 @@ $twoMonthWidthAndSpacing: $twoMonthWidth + $spacing;
 		}
 
 		.weeks {
-			float: left;
-			width: 100%;
-			overflow: hidden;
-			position: relative;
+			position: absolute;
+			top: 90px;
+			left: -$monthWidthAnd2Spacing;
+			width: 2000px;
 			height: 210px;
 
+			&.sliding {
+				transition: transform 500ms ease;
+				-webkit-transition: -webkit-transform 500ms ease;
+				&.left {
+					transform: translate3d(-$monthWidthAndSpacing, 0, 0);
+					-webkit-transform: translate3d(-$monthWidthAndSpacing, 0, 0);
+				}
+				&.right {
+					transform: translate3d($monthWidthAndSpacing, 0, 0);
+					-webkit-transform: translate3d($monthWidthAndSpacing, 0, 0);
+				}
+			}
+
 			> div {
-				position: absolute;
-
-				&.current {
-					left: 0;
-					width: $twoMonthWidth;
-				}
-				&.prev,
-				&.next {
-					width: $monthWidth;
-				}
-				&.prev {
-					left: -248px;
-					// left: -$monthWidthAndSpacing; // -278px
-				}
-				&.next {
-					left: $twoMonthWidthAndSpacing; // 278px
-				}
-				&.sliding {
-					transition: transform 500ms ease;
-					-webkit-transition: -webkit-transform 500ms ease;
-					// Next
-					&.left {
-						transform: translate3d(-$monthWidthAndSpacing, 0, 0);
-						-webkit-transform: translate3d(-$monthWidthAndSpacing, 0, 0);
-					}
-					// Prev
-					&.right {
-						transform: translate3d($monthWidthAndSpacing, 0, 0);
-						-webkit-transform: translate3d($monthWidthAndSpacing, 0, 0);
-					}
-				}
-
-				.weeks-one,
-				.weeks-two {
-					float: left;
-					width: $monthWidth;
-				}
-				.weeks-two {
-					margin-left: $spacing;
+				margin-right: 25px;
+				float: left;
+				width: $monthWidth;
+				&:first-child {
+					margin-left: 25px;
 				}
 			}
 

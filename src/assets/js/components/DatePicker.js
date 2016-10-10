@@ -30,7 +30,7 @@ var DatePicker = React.createClass({
 
 	componentDidMount: function() {
 		document.addEventListener("click", function(e) {
-			if (this.state.visible && e.target.className !== "date-picker-trigger" && !Helpers.parentsHaveClassName(e.target, "mc-date-picker"))
+			if (this.state.visible && e.target.className !== "mc-date-picker-trigger" && !Helpers.parentsHaveClassName(e.target, "mc-date-picker"))
 				this.hideCalendar();
 		}.bind(this));
 	},
@@ -199,7 +199,7 @@ var DatePicker = React.createClass({
 		var configInputs = this.state.config.theme.inputs
 
 		// Create class for calendar wrapper with visible or not
-		var calendarWrapperClassName = this.state.visible ? "calendar-wrapper visible" : "calendar-wrapper";
+		var calendarWrapperClassName = this.state.visible ? "mc-calendar-wrapper visible" : "mc-calendar-wrapper";
 		// If exists, add user specified class to the calendar wrapper
 		calendarWrapperClassName = Helpers.AddClassNameIfExists(calendarWrapperClassName, this.state.config.classNames.calendarWrapper);
 

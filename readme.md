@@ -188,3 +188,5 @@ var App = React.createClass({
 
 export default App;
 ```
+
+MC Datepicker built by Matine Chabrier [matine.co.uk](http://matine.co.uk)

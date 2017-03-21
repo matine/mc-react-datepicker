@@ -23,7 +23,7 @@ import McReactDatepicker from 'mc-react-datepicker';
 
 **Render the datepicker with (optional) userConfig object):**
 ```javascript
-<DatePicker userConfig={userConfig}></DatePicker>
+<McReactDatepicker userConfig={userConfig}></McReactDatepicker>
 ```
 
 ### Include the styles

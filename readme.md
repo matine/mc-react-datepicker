@@ -9,7 +9,7 @@ A two month view datepicker component (one month view on mobile). View a working
 ### Install the package via npm
 
 ```
-npm install react-datepicker --save
+npm install mc-react-datepicker --save
 ```
 
 ### Import and render the datepicker
